@@ -3,6 +3,7 @@ export interface Technique {
   name: string;
   description: string;
   category: string;
+  src?: string;
 }
 
 export interface StudyTechnique extends Technique {

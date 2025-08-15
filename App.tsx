@@ -213,7 +213,7 @@ const App: React.FC = () => {
       <main className="flex flex-col items-center w-full text-center flex-1 min-h-0">
         <div className="relative w-full max-w-4xl mx-auto flex justify-center items-center">
           <h1 className="text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl sm:mb-2">
-              Treino de vocabulário <span className="text-blue-400">Karatê Seido</span>
+              Vocabulário <span className="text-blue-400">Karatê Seido</span>
           </h1>
           <button
             onClick={() => setShowSettingsModal(true)}

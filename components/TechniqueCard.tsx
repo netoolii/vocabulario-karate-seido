@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { StudyTechnique } from '../types';
 
 interface TechniqueCardProps {
@@ -17,6 +17,16 @@ const TechniqueCard: React.FC<TechniqueCardProps> = ({
   countdown,
   onSkip,
 }) => {
+  const [backsideTechnique, setBacksideTechnique] = useState(technique);
+
+  useEffect(() => {
+    // Only update the back of the card's content when it's about to be shown.
+    // This prevents the next technique's answer from flashing during the transition.
+    if (showAnswer) {
+      setBacksideTechnique(technique);
+    }
+  }, [technique, showAnswer]);
+
   if (isGameFinished) {
     return (
       <div className="w-full max-w-2xl h-full rounded-2xl bg-gray-800 shadow-2xl flex flex-col items-center justify-center p-4 sm:p-6 text-center transition-all duration-500 ease-in-out transform scale-100">
@@ -52,21 +62,39 @@ const TechniqueCard: React.FC<TechniqueCardProps> = ({
               showAnswer ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
-            {countdown !== null && (
-                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center space-x-3 z-10">
-                    <span className="text-lg font-mono text-gray-200">{countdown}s</span>
-                    <button
-                        onClick={onSkip}
-                        className="px-3 py-1.5 text-sm font-bold text-white bg-blue-600/60 rounded-lg hover:bg-blue-500/90 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        aria-label="Pular para a próxima técnica"
-                    >
-                        Pular &raquo;
-                    </button>
-                </div>
+            {backsideTechnique && (
+              <>
+                {countdown !== null && (
+                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center space-x-3 z-10">
+                        <span className="text-lg font-mono text-gray-200">{countdown}s</span>
+                        <button
+                            onClick={onSkip}
+                            className="px-3 py-1.5 text-sm font-bold text-white bg-blue-600/60 rounded-lg hover:bg-blue-500/90 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            aria-label="Pular para a próxima técnica"
+                        >
+                            Pular &raquo;
+                        </button>
+                    </div>
+                )}
+                <p className="text-sm font-medium text-blue-300 uppercase tracking-wider sm:text-base">{backsideTechnique.category}</p>
+                <h2 className="mt-2 text-2xl font-bold text-white sm:text-4xl">{backsideTechnique.name}</h2>
+
+                <img
+                  key={backsideTechnique.name}
+                  src={backsideTechnique.src || `https://placehold.co/200x200/2d3748/9ca3af?text=Técnica`}
+                  alt={`Ilustração para ${backsideTechnique.name}`}
+                  className="my-3 w-32 h-32 sm:w-36 sm:h-36 object-cover rounded-lg shadow-md bg-white animate-fade-in-up"
+                  style={{ animationDelay: '100ms' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = `https://placehold.co/200x200/2d3748/9ca3af?text=Técnica`;
+                  }}
+                />
+
+                <p className="text-lg text-gray-300 sm:text-xl">{backsideTechnique.description}</p>
+              </>
             )}
-            <p className="text-sm font-medium text-blue-300 uppercase tracking-wider sm:text-base">{technique.category}</p>
-            <h2 className="mt-2 text-2xl font-bold text-white sm:text-5xl">{technique.name}</h2>
-            <p className="mt-3 text-lg text-gray-300 sm:mt-4 sm:text-2xl">{technique.description}</p>
           </div>
         </>
       )}
