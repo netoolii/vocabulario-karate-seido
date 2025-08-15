@@ -174,7 +174,7 @@ const App: React.FC = () => {
       setDeck(prevDeck => prevDeck.map(t => 
         t.name === selectedTechnique.name ? { ...t, missCount: t.missCount + 1 } : t
       ));
-      setCountdown(5);
+      setCountdown(10);
     }
   }, [selectedTechnique]);
 
