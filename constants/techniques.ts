@@ -80,7 +80,7 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Kata', description: 'Forma', category: 'Vocabulário', src: ''},
           
           // Armas do Corpo
-          { name: 'Seiken', description: 'Punho', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Seiken.png/1266px-Seiken.png'},
+          { name: 'Seiken', description: 'Punho', category: 'Armas do Corpo', src: 'https://www.thomasrye.com/wp-content/uploads/2010/01/foreknuckle_punch.jpg'},
           { name: 'Uraken', description: 'Punho Invertido', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/7/77/Uraken.png'},
           { name: 'Hiza', description: 'Joelho', category: 'Armas do Corpo', src: 'https://www.internationalkarate.co.uk/wp-content/uploads/2017/11/hiza.png'},
           { name: 'Haisoku', description: 'Peito do Pé', category: 'Armas do Corpo', src: 'https://www.smartdojo.net/img/syllabus/karate/detail/haisoku.png'},
