@@ -8,38 +8,38 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
       {
         name: '10º Kyu',
         techniques: [
-          // // Técnicas de Mãos (Te Waza)
-          // { name: 'Seiken Chudan Tsuki', description: 'Soco Médio (Plexo, Altura do Estômago)', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Jodan Tsuki', description: 'Soco Alto (Rosto)', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Gedan Tsuki', description: 'Soco Baixo (Região da Virilha)', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Sanbon Tsuki', description: 'Soco em Três Tempos', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Chudan Morote Tsuki', description: 'Soco Duplo Médio', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Jodan Morote Tsuki', description: 'Soco Duplo Alto', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Gedan Morote Tsuki', description: 'Soco Duplo Baixo', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Sanbon Morote Tsuki', description: 'Soco Duplo em Três Tempos', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Ago Tsuki', description: 'Soco Direto no Queixo', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Awase Tsuki', description: 'Soco Combinado Alto e Médio', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Uraken Shomen Uchi', description: 'Pancada Frontal com Punho Invertido no Rosto', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Uraken Sayu Uchi', description: 'Pancada Lateral com Punho Invertido no Rosto', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Uraken Furi Uchi', description: 'Pancada Lateral com Punho Invertido no Corpo', category: 'Técnicas de Mãos (Te Waza)' },
+          // Técnicas de Mãos (Te Waza)
+          { name: 'Seiken Chudan Tsuki', description: 'Soco Médio (Plexo, Altura do Estômago)', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Jodan Tsuki', description: 'Soco Alto (Rosto)', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Gedan Tsuki', description: 'Soco Baixo (Região da Virilha)', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Sanbon Tsuki', description: 'Soco em Três Tempos', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Chudan Morote Tsuki', description: 'Soco Duplo Médio', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Jodan Morote Tsuki', description: 'Soco Duplo Alto', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Gedan Morote Tsuki', description: 'Soco Duplo Baixo', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Sanbon Morote Tsuki', description: 'Soco Duplo em Três Tempos', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Ago Tsuki', description: 'Soco Direto no Queixo', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Awase Tsuki', description: 'Soco Combinado Alto e Médio', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Uraken Shomen Uchi', description: 'Pancada Frontal com Punho Invertido no Rosto', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Uraken Sayu Uchi', description: 'Pancada Lateral com Punho Invertido no Rosto', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Uraken Furi Uchi', description: 'Pancada Lateral com Punho Invertido no Corpo', category: 'Técnicas de Mãos (Te Waza)' },
           
-          // // Técnicas de Defesa (Uke Waza)
-          // { name: 'Jodan Uke', description: 'Bloqueio Alto', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Chudan Soto Uke', description: 'Bloqueio Médio de Fora para Dentro', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Chudan Uchi Uke', description: 'Bloqueio Médio de Dentro para Fora', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Gedan Barai', description: 'Bloqueio Baixo Varrendo', category: 'Técnicas de Defesa (Uke Waza)' },
+          // Técnicas de Defesa (Uke Waza)
+          { name: 'Jodan Uke', description: 'Bloqueio Alto', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Chudan Soto Uke', description: 'Bloqueio Médio de Fora para Dentro', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Chudan Uchi Uke', description: 'Bloqueio Médio de Dentro para Fora', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Gedan Barai', description: 'Bloqueio Baixo Varrendo', category: 'Técnicas de Defesa (Uke Waza)' },
           
-          // // Técnicas de Pernas (Ashi Waza)
-          // { name: 'Hiza Geri', description: 'Ataque com Joelho', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Mae Keage', description: 'Chute Frontal com a Perna Estendida', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Mae Kin Geri', description: 'Chute Frontal na Virilha', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Mae Geri', description: 'Chute Frontal', category: 'Técnicas de Pernas (Ashi Waza)' },
+          // Técnicas de Pernas (Ashi Waza)
+          { name: 'Hiza Geri', description: 'Ataque com Joelho', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Mae Keage', description: 'Chute Frontal com a Perna Estendida', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Mae Kin Geri', description: 'Chute Frontal na Virilha', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Mae Geri', description: 'Chute Frontal', category: 'Técnicas de Pernas (Ashi Waza)' },
           
-          // // Bases (Dachi)
-          // { name: 'Fudo Dachi', description: 'Postura Normal (Natural)', category: 'Bases (Dachi)' },
-          // { name: 'Sanchin Dachi', description: 'Postura dos Três Pontos (Enraizada)', category: 'Bases (Dachi)' },
-          // { name: 'Heiko Dachi', description: 'Postura Paralela', category: 'Bases (Dachi)' },
-          // { name: 'Zenkutsu Dachi', description: 'Postura com Apoio Frontal', category: 'Bases (Dachi)' },
+          // Bases (Dachi)
+          { name: 'Fudo Dachi', description: 'Postura Normal (Natural)', category: 'Bases (Dachi)' },
+          { name: 'Sanchin Dachi', description: 'Postura dos Três Pontos (Enraizada)', category: 'Bases (Dachi)' },
+          { name: 'Heiko Dachi', description: 'Postura Paralela', category: 'Bases (Dachi)' },
+          { name: 'Zenkutsu Dachi', description: 'Postura com Apoio Frontal', category: 'Bases (Dachi)' },
          
           // Vocabulário
           { name: 'Jodan', description: 'Parte Alta do Corpo (Rosto)', category: 'Vocabulário' },
@@ -52,47 +52,47 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Dachi', description: 'Base, Postura', category: 'Vocabulário' },
           { name: 'Kata', description: 'Forma', category: 'Vocabulário' },
           
-          // // Armas do Corpo
-          // { name: 'Seiken', description: 'Punho', category: 'Armas do Corpo' },
-          // { name: 'Uraken', description: 'Punho Invertido', category: 'Armas do Corpo' },
-          // { name: 'Hiza', description: 'Joelho', category: 'Armas do Corpo' },
-          // { name: 'Haisoku', description: 'Peito do Pé', category: 'Armas do Corpo' },
-          // { name: 'Chusoku', description: 'Bola do Pé', category: 'Armas do Corpo' }
+          // Armas do Corpo
+          { name: 'Seiken', description: 'Punho', category: 'Armas do Corpo' },
+          { name: 'Uraken', description: 'Punho Invertido', category: 'Armas do Corpo' },
+          { name: 'Hiza', description: 'Joelho', category: 'Armas do Corpo' },
+          { name: 'Haisoku', description: 'Peito do Pé', category: 'Armas do Corpo' },
+          { name: 'Chusoku', description: 'Bola do Pé', category: 'Armas do Corpo' }
         ]
       },
       {
         
         name: '9º Kyu',
         techniques: [
-          // // Técnicas de Mãos (Te Waza)
-          // { name: 'Chudan Nukite', description: 'Ataque com a Ponta dos Dedos no Plexo', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Jodan Nukite', description: 'Ataque com a Ponta dos Dedos na Garganta', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Chudan Morote Nukite', description: 'Ataque Duplo com a Ponta dos Dedos no Plexo', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Jodan Morote Nukite', description: 'Ataque Duplo com a Ponta dos Dedos na Garg.', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shotei Gedan Oroshi', description: 'Ataque com a Base da Mão Descendente', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shotei Jodan Uchi', description: 'Ataque com a Base da Mão no Queixo', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shuto Gammen Uchi', description: 'Ataque Circular com a Faca da Mão na Têmpora', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shuto Sakotsu Uchi', description: 'Ataque Descendente com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shuto Uchi Uchi', description: 'Ataque de Dentro para Fora com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
+          // Técnicas de Mãos (Te Waza)
+          { name: 'Chudan Nukite', description: 'Ataque com a Ponta dos Dedos no Plexo', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Jodan Nukite', description: 'Ataque com a Ponta dos Dedos na Garganta', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Chudan Morote Nukite', description: 'Ataque Duplo com a Ponta dos Dedos no Plexo', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Jodan Morote Nukite', description: 'Ataque Duplo com a Ponta dos Dedos na Garg.', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shotei Gedan Oroshi', description: 'Ataque com a Base da Mão Descendente', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shotei Jodan Uchi', description: 'Ataque com a Base da Mão no Queixo', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shuto Gammen Uchi', description: 'Ataque Circular com a Faca da Mão na Têmpora', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shuto Sakotsu Uchi', description: 'Ataque Descendente com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shuto Uchi Uchi', description: 'Ataque de Dentro para Fora com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
 
-          // // Técnicas de Defesa (Uke Waza)
-          // { name: 'Chudan Uchi Uke Gedan Barai', description: 'Bloqueio de Dentro para Fora + Baixo Varrendo', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Kakiwake Uke', description: 'Bloqueio Baixo Circular Duplo', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Seiken Jodan Juji Uke', description: 'Bloqueio Alto com Punhos Cerrados em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Seiken Gedan Juji Uke', description: 'Bloqueio Baixo com Punhos Cerrados em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
+          // Técnicas de Defesa (Uke Waza)
+          { name: 'Chudan Uchi Uke Gedan Barai', description: 'Bloqueio de Dentro para Fora + Baixo Varrendo', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Kakiwake Uke', description: 'Bloqueio Baixo Circular Duplo', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Seiken Jodan Juji Uke', description: 'Bloqueio Alto com Punhos Cerrados em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Seiken Gedan Juji Uke', description: 'Bloqueio Baixo com Punhos Cerrados em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
 
-          // // Técnicas de Pernas (Ashi Waza)
-          // { name: 'Hiza Mawashi Geri', description: 'Ataque Circular com Joelho', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Mawashi Geri', description: 'Chute Circular', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Yoko Keage', description: 'Chute Lateral Alto com a Perna Estendida', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Yoko Geri', description: 'Chute Lateral com a Faca do Pé', category: 'Técnicas de Pernas (Ashi Waza)' },
+          // Técnicas de Pernas (Ashi Waza)
+          { name: 'Hiza Mawashi Geri', description: 'Ataque Circular com Joelho', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Mawashi Geri', description: 'Chute Circular', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Yoko Keage', description: 'Chute Lateral Alto com a Perna Estendida', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Yoko Geri', description: 'Chute Lateral com a Faca do Pé', category: 'Técnicas de Pernas (Ashi Waza)' },
 
-          // // Bases (Dachi)
-          // { name: 'Heisoku Dachi', description: 'Postura com os Pés Unidos', category: 'Bases (Dachi)' },
-          // { name: 'Musubi Dachi', description: 'Postura com os Pés para Fora', category: 'Bases (Dachi)' },
-          // { name: 'Uchi Hachiji Dachi', description: 'Postura Invertida com os Pés para Dentro', category: 'Bases (Dachi)' },
-          // { name: 'Kiba Dachi', description: 'Postura Paralela do “Cavaleiro”', category: 'Bases (Dachi)' },
-          // { name: 'Re Dachi', description: 'Postura Básica de Combate', category: 'Bases (Dachi)' },
+          // Bases (Dachi)
+          { name: 'Heisoku Dachi', description: 'Postura com os Pés Unidos', category: 'Bases (Dachi)' },
+          { name: 'Musubi Dachi', description: 'Postura com os Pés para Fora', category: 'Bases (Dachi)' },
+          { name: 'Uchi Hachiji Dachi', description: 'Postura Invertida com os Pés para Dentro', category: 'Bases (Dachi)' },
+          { name: 'Kiba Dachi', description: 'Postura Paralela do “Cavaleiro”', category: 'Bases (Dachi)' },
+          { name: 'Re Dachi', description: 'Postura Básica de Combate', category: 'Bases (Dachi)' },
 
           // Vocabulário
           { name: 'Te', description: 'Mão', category: 'Vocabulário' },
@@ -104,12 +104,12 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Sempai', description: 'Estudante mais Antigo, mais Experiente', category: 'Vocabulário' },
           { name: 'Kohai', description: 'Estudante Novato, menos Experiente', category: 'Vocabulário' },
 
-          // // Armas do Corpo
-          // { name: 'Shuto', description: 'Faca da Mão', category: 'Armas do Corpo' },
-          // { name: 'Nukite', description: 'Ponta dos Dedos', category: 'Armas do Corpo' },
-          // { name: 'Shotei', description: 'Calcanhar da Palma (corrigir)', category: 'Armas do Corpo' },
-          // { name: 'Kote', description: 'Parte de fora do antebraço (corrigir)', category: 'Armas do Corpo' },
-          // { name: 'Sokuto', description: 'Faca do Pé', category: 'Armas do Corpo' }
+          // Armas do Corpo
+          { name: 'Shuto', description: 'Faca da Mão', category: 'Armas do Corpo' },
+          { name: 'Nukite', description: 'Ponta dos Dedos', category: 'Armas do Corpo' },
+          { name: 'Shotei', description: 'Calcanhar da Palma (corrigir)', category: 'Armas do Corpo' },
+          { name: 'Kote', description: 'Parte de fora do antebraço (corrigir)', category: 'Armas do Corpo' },
+          { name: 'Sokuto', description: 'Faca do Pé', category: 'Armas do Corpo' }
         ]
       }
     ]
@@ -121,31 +121,31 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
       {
         name: '8º Kyu',
         techniques: [
-          // // Técnicas de Mãos (Te Waza)
-          // { name: 'Seiken Tate Tsuki', description: 'Soco Médio com Punho na Vertical', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Uraken Mawashi Uchi', description: 'Pancada Circular com Punho Invertido na Nuca', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shuto Sakotsu Uchi Komi', description: 'Ataque Frontal Direto com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Shuto Hizo Uchi', description: 'Ataque Circular Baixo com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Hiji Mawashi Ate', description: 'Cotovelada Circular', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Hiji Age', description: 'Cotovelada Ascendente', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Jodan Haito Uchi', description: 'Ataque Circular com a Faca Interna da Mão', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Jodan Morote Haito Uchi', description: 'Ataque Duplo com a Faca Interna da Mão', category: 'Técnicas de Mãos (Te Waza)' },
+          // Técnicas de Mãos (Te Waza)
+          { name: 'Seiken Tate Tsuki', description: 'Soco Médio com Punho na Vertical', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Uraken Mawashi Uchi', description: 'Pancada Circular com Punho Invertido na Nuca', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shuto Sakotsu Uchi Komi', description: 'Ataque Frontal Direto com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Shuto Hizo Uchi', description: 'Ataque Circular Baixo com a Faca da Mão', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Hiji Mawashi Ate', description: 'Cotovelada Circular', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Hiji Age', description: 'Cotovelada Ascendente', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Jodan Haito Uchi', description: 'Ataque Circular com a Faca Interna da Mão', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Jodan Morote Haito Uchi', description: 'Ataque Duplo com a Faca Interna da Mão', category: 'Técnicas de Mãos (Te Waza)' },
 
-          // // Técnicas de Defesa (Uke Waza)
-          // { name: 'Jodan Soete Uke', description: 'Bloqueio Alto Reforçado', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Chudan Uchi Soete Uke', description: 'Bloqueio Médio de Dentro para Fora Reforçado', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Kote Uke', description: 'Bloqueio Circular Ascendente com Antebraço', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Kake Uke', description: 'Bloqueio Circular Descendente com Antebraço', category: 'Técnicas de Defesa (Uke Waza)' },
+          // Técnicas de Defesa (Uke Waza)
+          { name: 'Jodan Soete Uke', description: 'Bloqueio Alto Reforçado', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Chudan Uchi Soete Uke', description: 'Bloqueio Médio de Dentro para Fora Reforçado', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Kote Uke', description: 'Bloqueio Circular Ascendente com Antebraço', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Kake Uke', description: 'Bloqueio Circular Descendente com Antebraço', category: 'Técnicas de Defesa (Uke Waza)' },
 
-          // // Técnicas de Pernas (Ashi Waza)
-          // { name: 'Kansetsu Geri', description: 'Chute Lateral na Altura do Joelho', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Uchi Mawashi Geri', description: 'Chute Circular de Dentro para Fora', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Soto Mawashi Geri', description: 'Chute Circular de Fora para Dentro', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Ushiro Geri', description: 'Chute para Trás', category: 'Técnicas de Pernas (Ashi Waza)' },
+          // Técnicas de Pernas (Ashi Waza)
+          { name: 'Kansetsu Geri', description: 'Chute Lateral na Altura do Joelho', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Uchi Mawashi Geri', description: 'Chute Circular de Dentro para Fora', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Soto Mawashi Geri', description: 'Chute Circular de Fora para Dentro', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Ushiro Geri', description: 'Chute para Trás', category: 'Técnicas de Pernas (Ashi Waza)' },
 
-          // // Bases (Dachi)
-          // { name: 'Kokutsu Dachi', description: 'Postura com Apoio Traseiro', category: 'Bases (Dachi)' },
-          // { name: 'Shiko Dachi', description: 'Postura do Sumo', category: 'Bases (Dachi)' },
+          // Bases (Dachi)
+          { name: 'Kokutsu Dachi', description: 'Postura com Apoio Traseiro', category: 'Bases (Dachi)' },
+          { name: 'Shiko Dachi', description: 'Postura do Sumo', category: 'Bases (Dachi)' },
 
           // Vocabulário
           { name: 'Rei', description: 'Saudação', category: 'Vocabulário' },
@@ -164,38 +164,38 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Sensei', description: 'Professor', category: 'Vocabulário' },
           { name: 'Karategi', description: 'Uniforme para a Prática do Karatê', category: 'Vocabulário' },
 
-          // // Armas do Corpo
-          // { name: 'Tate Ken', description: 'Punho Horizontal', category: 'Armas do Corpo' },
-          // { name: 'Hiji', description: 'Cotovelo', category: 'Armas do Corpo' },
-          // { name: 'Haito', description: 'Borda do Lado do Polegar (corrigir)', category: 'Armas do Corpo' },
-          // { name: 'Kakato', description: 'Calcanhar', category: 'Armas do Corpo' },
-          // { name: 'Teisoku', description: 'Parte Lateral Interna do Pé', category: 'Armas do Corpo' }
+          // Armas do Corpo
+          { name: 'Tate Ken', description: 'Punho Horizontal', category: 'Armas do Corpo' },
+          { name: 'Hiji', description: 'Cotovelo', category: 'Armas do Corpo' },
+          { name: 'Haito', description: 'Borda do Lado do Polegar (corrigir)', category: 'Armas do Corpo' },
+          { name: 'Kakato', description: 'Calcanhar', category: 'Armas do Corpo' },
+          { name: 'Teisoku', description: 'Parte Lateral Interna do Pé', category: 'Armas do Corpo' }
         ]
       },
       {
         name: '7º Kyu',
         techniques: [
-          // // Técnicas de Mãos (Te Waza): Em Kiba Dachi
-          // { name: 'Seiken Jun Tsuki', description: 'Soco Lateral Médio "Empurrando"', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Kagi Tsuki', description: 'Soco Cruzado Médio', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Shita Tsuki', description: 'Soco Curto Médio com Punho Invertido', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Seiken Age Tsuki', description: 'Soco Ascendente com Punho Invertido', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Tettsui Gammen Uchi', description: 'Ataque Circular com Lateral do Punho na Têmpora', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Tettsui Sakotsu Uchi', description: 'Ataque Descendente com Lateral do Punho ("Martelo")', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Tettsui Uchi Uchi Frontal', description: 'Ataque de Dentro para Fora com Lateral do Punho', category: 'Técnicas de Mãos (Te Waza)' },
-          // { name: 'Tettsui Uchi Uchi Lateral', description: 'Ataque de Dentro para Fora com Lateral do Punho', category: 'Técnicas de Mãos (Te Waza)' },
+          // Técnicas de Mãos (Te Waza): Em Kiba Dachi
+          { name: 'Seiken Jun Tsuki', description: 'Soco Lateral Médio "Empurrando"', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Kagi Tsuki', description: 'Soco Cruzado Médio', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Shita Tsuki', description: 'Soco Curto Médio com Punho Invertido', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Seiken Age Tsuki', description: 'Soco Ascendente com Punho Invertido', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Tettsui Gammen Uchi', description: 'Ataque Circular com Lateral do Punho na Têmpora', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Tettsui Sakotsu Uchi', description: 'Ataque Descendente com Lateral do Punho ("Martelo")', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Tettsui Uchi Uchi Frontal', description: 'Ataque de Dentro para Fora com Lateral do Punho', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Tettsui Uchi Uchi Lateral', description: 'Ataque de Dentro para Fora com Lateral do Punho', category: 'Técnicas de Mãos (Te Waza)' },
 
-          // // Técnicas de Defesa (Uke Waza)
-          // { name: 'Shuto Mawashi Uke', description: 'Bloqueio Circular Lateral com Faca da Mão (Kokutsu Dachi)', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Shuto Enkei Uke', description: 'Bloqueio Circular Duplo com Faca da Mão', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Shuto Jodan Juji Uke', description: 'Bloqueio Alto com Mãos Abertas em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
-          // { name: 'Shuto Gedan Juji Uke', description: 'Bloqueio Baixo com Mãos Abertas em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
+          // Técnicas de Defesa (Uke Waza)
+          { name: 'Shuto Mawashi Uke', description: 'Bloqueio Circular Lateral com Faca da Mão (Kokutsu Dachi)', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Shuto Enkei Uke', description: 'Bloqueio Circular Duplo com Faca da Mão', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Shuto Jodan Juji Uke', description: 'Bloqueio Alto com Mãos Abertas em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
+          { name: 'Shuto Gedan Juji Uke', description: 'Bloqueio Baixo com Mãos Abertas em Cruz', category: 'Técnicas de Defesa (Uke Waza)' },
 
-          // // Técnicas de Pernas (Ashi Waza)
-          // { name: 'Kake Geri', description: 'Chute Circular de Fora para Dentro em "Gancho"', category: 'Técnicas de Pernas (Ashi Waza)' },
+          // Técnicas de Pernas (Ashi Waza)
+          { name: 'Kake Geri', description: 'Chute Circular de Fora para Dentro em "Gancho"', category: 'Técnicas de Pernas (Ashi Waza)' },
 
-          // // Bases (Dachi)
-          // { name: 'Nekoashi Dachi', description: 'Postura com Apoio Traseiro do "Gato"', category: 'Bases (Dachi)' },
+          // Bases (Dachi)
+          { name: 'Nekoashi Dachi', description: 'Postura com Apoio Traseiro do "Gato"', category: 'Bases (Dachi)' },
 
           // Vocabulário
           { name: 'Shinzen', description: 'Templo; Centro Simbólico do Dojo', category: 'Vocabulário' },
@@ -215,11 +215,11 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Zori', description: 'Chinelo de Dedo', category: 'Vocabulário' },
 
           // Armas do Corpo
-          // { name: 'Tettsui', description: 'Mão como Martelo (corrigir)', category: 'Armas do Corpo' },
-          // { name: 'Toho', description: 'Parte Média Entre o Indicador e o Polegar', category: 'Armas do Corpo' },
-          // { name: 'Uchi Kote', description: 'Parte de Cima Antebraço', category: 'Armas do Corpo' },
-          // { name: 'Soto Kote', description: 'Parte de Baixo Antebraço', category: 'Armas do Corpo' },
-          // { name: 'Ushiro Kakato', description: 'Parte de Trás do Calcanhar', category: 'Armas do Corpo'}
+          { name: 'Tettsui', description: 'Mão como Martelo (corrigir)', category: 'Armas do Corpo' },
+          { name: 'Toho', description: 'Parte Média Entre o Indicador e o Polegar', category: 'Armas do Corpo' },
+          { name: 'Uchi Kote', description: 'Parte de Cima Antebraço', category: 'Armas do Corpo' },
+          { name: 'Soto Kote', description: 'Parte de Baixo Antebraço', category: 'Armas do Corpo' },
+          { name: 'Ushiro Kakato', description: 'Parte de Trás do Calcanhar', category: 'Armas do Corpo'}
         ]
       }
     ]
@@ -231,22 +231,22 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
       {
         name: '6º Kyu',
         techniques: [
-          // // Técnicas de Mãos (Te Waza): Em Kiba Dachi
-          // { name: 'Tettsui Uchi Uchi Lateral x2', description: 'Ataque de Dentro para Fora com Lateral do Punho', category: 'Técnicas de Mãos (Te Waza): Em Kiba Dachi' },
-          // { name: 'Hiji Yoko Ate', description: 'Cotovelada Lateral Curta', category: 'Técnicas de Mãos (Te Waza): Em Kiba Dachi' },
-          // { name: 'Hiji Oroshi', description: 'Cotovelada Descendente', category: 'Técnicas de Mãos (Te Waza): Em Kiba Dachi' },
+          // Técnicas de Mãos (Te Waza): Em Kiba Dachi
+          { name: 'Tettsui Uchi Uchi Lateral x2', description: 'Ataque de Dentro para Fora com Lateral do Punho', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Hiji Yoko Ate', description: 'Cotovelada Lateral Curta', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Hiji Oroshi', description: 'Cotovelada Descendente', category: 'Técnicas de Mãos (Te Waza)' },
 
-          // // Técnicas de Defesa (Uke Waza)
-          // { name: 'Koken Uke', description: 'Bloqueio Ascendente com o Pulso Superior (Kokutsu Dachi)', category: 'Técnicas de Defesa (Uke Waza)' },
+          // Técnicas de Defesa (Uke Waza)
+          { name: 'Koken Uke', description: 'Bloqueio Ascendente com o Pulso Superior (Kokutsu Dachi)', category: 'Técnicas de Defesa (Uke Waza)' },
 
-          // // Técnicas de Pernas (Ashi Waza)
-          // { name: 'Ushiro Kake Geri', description: 'Chute Circular para Trás em “Gancho”', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Tobi Mae Geri', description: 'Chute Frontal com Salto', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Ushiro Mawashi Geri', description: 'Chute Circular para Trás “Giratório”', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Tobi Mawashi Geri', description: 'Chute Circular com Salto', category: 'Técnicas de Pernas (Ashi Waza)' },
+          // Técnicas de Pernas (Ashi Waza)
+          { name: 'Ushiro Kake Geri', description: 'Chute Circular para Trás em “Gancho”', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Tobi Mae Geri', description: 'Chute Frontal com Salto', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Ushiro Mawashi Geri', description: 'Chute Circular para Trás “Giratório”', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Tobi Mawashi Geri', description: 'Chute Circular com Salto', category: 'Técnicas de Pernas (Ashi Waza)' },
 
-          // // Bases (Dachi)
-          // { name: 'Tsuruashi Dachi', description: 'Postura do "Grou" (Ave)', category: 'Bases (Dachi)' },
+          // Bases (Dachi)
+          { name: 'Tsuruashi Dachi', description: 'Postura do "Grou" (Ave)', category: 'Bases (Dachi)' },
 
           // Vocabulário
           { name: 'Atemi', description: 'Pancada Direcionada a um Ponto Anatômico Frágil', category: 'Vocabulário' },
@@ -263,30 +263,30 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Shiai', description: 'Competição, Torneio', category: 'Vocabulário' },
           { name: 'Wazari', description: 'Quase Ponto Completo, Meio Ponto', category: 'Vocabulário' },
 
-          // // Armas do Corpo
-          // { name: 'Ippon Ken', description: 'Golpe com o punho onde o dedo indicador é estendido e o polegar pressionado contra ele, formando uma ponta afiada', category: 'Armas do Corpo' },
-          // { name: 'Ippon Nukite', description: '(corrigir)', category: 'Armas do Corpo' },
-          // { name: 'Hirate', description: 'Palma da mão', category: 'Armas do Corpo' },
-          // { name: 'Koken', description: 'Parte de Cima do Pulso', category: 'Armas do Corpo' },
-          // { name: 'Tsuma Saki', description: 'Ponta do Pé', category: 'Armas do Corpo' },
+          // Armas do Corpo
+          { name: 'Ippon Ken', description: 'Golpe com o punho onde o dedo indicador é estendido e o polegar pressionado contra ele, formando uma ponta afiada', category: 'Armas do Corpo' },
+          { name: 'Ippon Nukite', description: '(corrigir)', category: 'Armas do Corpo' },
+          { name: 'Hirate', description: 'Palma da mão', category: 'Armas do Corpo' },
+          { name: 'Koken', description: 'Parte de Cima do Pulso', category: 'Armas do Corpo' },
+          { name: 'Tsuma Saki', description: 'Ponta do Pé', category: 'Armas do Corpo' },
         ]
       },
       {
         name: '5º Kyu',
         techniques: [
-          // // Técnicas de Mãos (Te Waza): Em Kiba Dachi
-          // { name: 'Hiji Ushiro Ate', description: 'Cotovelada para Trás', category: 'Técnicas de Mãos (Te Waza): Em Kiba Dachi' },
-          // { name: 'Hiji Ushiro Age', description: 'Cotovelada para Trás Ascendente', category: 'Técnicas de Mãos (Te Waza): Em Kiba Dachi' },
+          // Técnicas de Mãos (Te Waza): Em Kiba Dachi
+          { name: 'Hiji Ushiro Ate', description: 'Cotovelada para Trás', category: 'Técnicas de Mãos (Te Waza)' },
+          { name: 'Hiji Ushiro Age', description: 'Cotovelada para Trás Ascendente', category: 'Técnicas de Mãos (Te Waza)' },
 
-          // // Técnicas de Defesa (Uke Waza)
-          // { name: 'Tensho Uke', description: 'Bloqueio Circular Alto de Dentro para Fora com a Faca da Mão (Kokutsu Dachi)', category: 'Técnicas de Defesa (Uke Waza)' },
+          // Técnicas de Defesa (Uke Waza)
+          { name: 'Tensho Uke', description: 'Bloqueio Circular Alto de Dentro para Fora com a Faca da Mão (Kokutsu Dachi)', category: 'Técnicas de Defesa (Uke Waza)' },
 
-          // // Técnicas de Pernas (Ashi Waza)
-          // { name: 'Kuzure Ushiro Mawashi Geri', description: 'Variação do Chute Circular para Trás “Giratório”', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Tobi Yoko Geri', description: 'Chute Lateral com Salto', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Gyaku Mawashi Geri', description: 'Chute Circular Invertido de Dentro para Fora', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Uchi Mawashi Kakato Otoshi', description: 'Chute Circular de Dentro para Fora + Descendente com o Calcanhar', category: 'Técnicas de Pernas (Ashi Waza)' },
-          // { name: 'Soto Mawashi Kakato Otoshi', description: 'Chute Circular de Fora para Dentro + Descendente com o Calcanhar', category: 'Técnicas de Pernas (Ashi Waza)' },
+          // Técnicas de Pernas (Ashi Waza)
+          { name: 'Kuzure Ushiro Mawashi Geri', description: 'Variação do Chute Circular para Trás “Giratório”', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Tobi Yoko Geri', description: 'Chute Lateral com Salto', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Gyaku Mawashi Geri', description: 'Chute Circular Invertido de Dentro para Fora', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Uchi Mawashi Kakato Otoshi', description: 'Chute Circular de Dentro para Fora + Descendente com o Calcanhar', category: 'Técnicas de Pernas (Ashi Waza)' },
+          { name: 'Soto Mawashi Kakato Otoshi', description: 'Chute Circular de Fora para Dentro + Descendente com o Calcanhar', category: 'Técnicas de Pernas (Ashi Waza)' },
 
           // Vocabulário
           { name: 'Geiko', description: 'Forma de Treinamento', category: 'Vocabulário' },
@@ -305,12 +305,12 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Hombu Dojo', description: 'Academia Central Mundial (Nova Iorque)', category: 'Vocabulário' },
           { name: 'Makiwara', description: 'Alvo para Treinamento de Golpes, em Geral de Madeira e Palha', category: 'Vocabulário' },
         
-          // // Armas do Corpo
-          // { name: 'Nakadaka Ken', description: 'Seiken com dedo medio Protuberante', category: 'Armas do Corpo' },
-          // { name: 'Nihon Nukite', description: 'Dois dedos (geralmente o indicador e o médio) são usados para realizar o ataque', category: 'Armas do Corpo' },
-          // { name: 'Hiraken', description: 'Nós dos dedos', category: 'Armas do Corpo' },
-          // { name: 'Kumade', description: 'Palma plana com os dedos Dobrados', category: 'Armas do Corpo' },
-          // { name: 'Keiko', description: 'Ponta dos dedos em formato de pinça', category: 'Armas do Corpo' },
+          // Armas do Corpo
+          { name: 'Nakadaka Ken', description: 'Seiken com dedo medio Protuberante', category: 'Armas do Corpo' },
+          { name: 'Nihon Nukite', description: 'Dois dedos (geralmente o indicador e o médio) são usados para realizar o ataque', category: 'Armas do Corpo' },
+          { name: 'Hiraken', description: 'Nós dos dedos', category: 'Armas do Corpo' },
+          { name: 'Kumade', description: 'Palma plana com os dedos Dobrados', category: 'Armas do Corpo' },
+          { name: 'Keiko', description: 'Ponta dos dedos em formato de pinça', category: 'Armas do Corpo' },
         
         ]
       }

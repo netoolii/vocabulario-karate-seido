@@ -6,11 +6,23 @@ import TechniqueCard from './components/TechniqueCard';
 import KyuSelector from './components/KyuSelector';
 import InstructionsModal from './components/InstructionsModal';
 import SummaryModal from './components/SummaryModal';
+import SettingsModal from './components/SettingsModal';
+
+const ALL_CATEGORIES = ['Armas do Corpo', 'Vocabulário', 'Técnicas de Mãos (Te Waza)', 'Técnicas de Defesa (Uke Waza)', 'Técnicas de Pernas (Ashi Waza)', 'Bases (Dachi)'];
 
 const App: React.FC = () => {
   const [selectedKyus, setSelectedKyus] = useState<string[]>(
     () => [TECHNIQUES_BY_BELT[0].kyus[0].name]
   );
+
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('selectedCategories');
+      return saved ? JSON.parse(saved) : ALL_CATEGORIES;
+    } catch (error) {
+      return ALL_CATEGORIES;
+    }
+  });
   
   const [deck, setDeck] = useState<StudyTechnique[]>([]);
   const [totalTechniques, setTotalTechniques] = useState(0);
@@ -21,6 +33,7 @@ const App: React.FC = () => {
   const [progressMessage, setProgressMessage] = useState<string | null>(null);
   const [showInstructions, setShowInstructions] = useState<boolean>(false);
   const [showSummaryModal, setShowSummaryModal] = useState<boolean>(false);
+  const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
   const [difficultTechniques, setDifficultTechniques] = useState<StudyTechnique[]>([]);
   
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -32,17 +45,22 @@ const App: React.FC = () => {
       setShowInstructions(true);
     }
   }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
+  }, [selectedCategories]);
 
   const handleCloseInstructions = useCallback(() => {
     localStorage.setItem('hasSeenInstructions', 'true');
     setShowInstructions(false);
   }, []);
 
-  const initializeDeck = useCallback((kyuNames: string[]) => {
+  const initializeDeck = useCallback((kyuNames: string[], categories: string[]) => {
     const allKyus = TECHNIQUES_BY_BELT.flatMap(belt => belt.kyus);
     const selectedTechniques = allKyus
       .filter(kyu => kyuNames.includes(kyu.name))
-      .flatMap(kyu => kyu.techniques);
+      .flatMap(kyu => kyu.techniques)
+      .filter(tech => categories.includes(tech.category));
 
     setTotalTechniques(selectedTechniques.length);
     setDeck(selectedTechniques.map(t => ({ ...t, isMastered: false, missCount: 0 })));
@@ -58,8 +76,8 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    initializeDeck(selectedKyus);
-  }, [selectedKyus, initializeDeck]);
+    initializeDeck(selectedKyus, selectedCategories);
+  }, [selectedKyus, selectedCategories, initializeDeck]);
   
   const handleToggleKyu = useCallback((kyuName: string) => {
     setSelectedKyus(prev => {
@@ -177,19 +195,39 @@ const App: React.FC = () => {
 
   const handleCloseSummary = useCallback(() => {
     setShowSummaryModal(false);
-    initializeDeck(selectedKyus);
-  }, [initializeDeck, selectedKyus]);
+    initializeDeck(selectedKyus, selectedCategories);
+  }, [initializeDeck, selectedKyus, selectedCategories]);
 
   return (
     <div className="h-screen bg-gray-900 text-white flex flex-col items-center p-2 sm:p-4 selection:bg-blue-500/30 overflow-hidden">
       {showInstructions && <InstructionsModal onClose={handleCloseInstructions} />}
       {showSummaryModal && <SummaryModal techniques={difficultTechniques} onClose={handleCloseSummary} />}
+      {showSettingsModal && (
+        <SettingsModal
+          allCategories={ALL_CATEGORIES}
+          selectedCategories={selectedCategories}
+          onSave={setSelectedCategories}
+          onClose={() => setShowSettingsModal(false)}
+        />
+      )}
       <main className="flex flex-col items-center w-full text-center flex-1 min-h-0">
-        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl sm:mb-2">
-            Treino de vocabulário <span className="text-blue-400">Karatê Seido</span>
-        </h1>
+        <div className="relative w-full max-w-4xl mx-auto flex justify-center items-center">
+          <h1 className="text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl sm:mb-2">
+              Treino de vocabulário <span className="text-blue-400">Karatê Seido</span>
+          </h1>
+          <button
+            onClick={() => setShowSettingsModal(true)}
+            className="absolute top-1/2 -translate-y-1/2 right-0 p-2 text-gray-500 hover:text-white transition-colors duration-200 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Filtrar categorias"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </button>
+        </div>
         <p className="mb-2 text-sm text-gray-400 max-w-3xl sm:text-lg sm:mb-4">
-          Selecione um ou mais níveis de diferentes faixas para montar o seu treino personalizado.
+          Selecione os Kyus e filtre as categorias de técnicas para montar seu treino.
         </p>
 
         <div className="w-full max-w-4xl rounded-lg mb-2">
@@ -224,7 +262,7 @@ const App: React.FC = () => {
             variant="primary"
             disabled={totalTechniques === 0 || isGameFinished || showAnswer}
           >
-            {selectedTechnique ? 'Próxima Técnica (Acertei)' : 'Começar Treino'}
+            {totalTechniques > 0 ? (selectedTechnique ? 'Próxima Técnica (Acertei)' : 'Começar Treino') : 'Nenhuma técnica encontrada'}
           </Button>
           <Button 
             onClick={handleShowAnswer} 
