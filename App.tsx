@@ -9,6 +9,7 @@ import SummaryModal from './components/SummaryModal';
 import SettingsModal from './components/SettingsModal';
 
 const ALL_CATEGORIES = ['Armas do Corpo', 'Vocabulário', 'Técnicas de Mãos (Te Waza)', 'Técnicas de Defesa (Uke Waza)', 'Técnicas de Pernas (Ashi Waza)', 'Bases (Dachi)'];
+const INSTRUCTIONS_VERSION = '1.1.0'; // Version for the instructions modal
 
 const App: React.FC = () => {
   const [selectedKyus, setSelectedKyus] = useState<string[]>(
@@ -36,12 +37,24 @@ const App: React.FC = () => {
   const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
   const [difficultTechniques, setDifficultTechniques] = useState<StudyTechnique[]>([]);
   
+  const [countdownDuration, setCountdownDuration] = useState<number>(() => {
+    try {
+      const saved = localStorage.getItem('countdownDuration');
+      return saved ? parseInt(saved, 10) : 10;
+    } catch (error) {
+      return 10;
+    }
+  });
   const [countdown, setCountdown] = useState<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const [mode, setMode] = useState<'quiz' | 'study'>('quiz');
+  const [studyOrder, setStudyOrder] = useState<'random' | 'sequential'>('random');
+  const [studyIndex, setStudyIndex] = useState(0);
+
   useEffect(() => {
-    const hasSeen = localStorage.getItem('hasSeenInstructions');
-    if (!hasSeen) {
+    const seenVersion = localStorage.getItem('seenInstructionsVersion');
+    if (seenVersion !== INSTRUCTIONS_VERSION) {
       setShowInstructions(true);
     }
   }, []);
@@ -50,30 +63,54 @@ const App: React.FC = () => {
     localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
   }, [selectedCategories]);
 
+  useEffect(() => {
+    localStorage.setItem('countdownDuration', countdownDuration.toString());
+  }, [countdownDuration]);
+
   const handleCloseInstructions = useCallback(() => {
-    localStorage.setItem('hasSeenInstructions', 'true');
+    localStorage.setItem('seenInstructionsVersion', INSTRUCTIONS_VERSION);
     setShowInstructions(false);
   }, []);
 
+  const shuffleArray = (array: StudyTechnique[]): StudyTechnique[] => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   const initializeDeck = useCallback((kyuNames: string[], categories: string[]) => {
     const allKyus = TECHNIQUES_BY_BELT.flatMap(belt => belt.kyus);
-    const selectedTechniques = allKyus
+    const selectedTechs = allKyus
       .filter(kyu => kyuNames.includes(kyu.name))
       .flatMap(kyu => kyu.techniques)
       .filter(tech => categories.includes(tech.category));
 
-    setTotalTechniques(selectedTechniques.length);
-    setDeck(selectedTechniques.map(t => ({ ...t, isMastered: false, missCount: 0 })));
-    setSelectedTechnique(null);
+    const initialDeck = selectedTechs.map(t => ({ ...t, isMastered: false, missCount: 0 }));
+    setTotalTechniques(initialDeck.length);
+    
+    // Reset general state
     setShowAnswer(false);
-    setIsGameFinished(false);
-    setInteractionCount(0);
-    setProgressMessage(null);
-    setShowSummaryModal(false);
-    setDifficultTechniques([]);
-    setCountdown(null);
+    setIsGameFinished(initialDeck.length === 0);
     if (timerRef.current) clearTimeout(timerRef.current);
-  }, []);
+    setCountdown(null);
+
+    if (mode === 'study') {
+      const studyDeck = studyOrder === 'random' ? shuffleArray(initialDeck) : initialDeck;
+      setDeck(studyDeck);
+      setStudyIndex(0);
+      setSelectedTechnique(studyDeck.length > 0 ? studyDeck[0] : null);
+    } else { // quiz mode
+      setDeck(initialDeck);
+      setSelectedTechnique(null);
+      setInteractionCount(0);
+      setProgressMessage(null);
+      setShowSummaryModal(false);
+      setDifficultTechniques([]);
+    }
+  }, [mode, studyOrder]);
 
   useEffect(() => {
     initializeDeck(selectedKyus, selectedCategories);
@@ -174,12 +211,12 @@ const App: React.FC = () => {
       setDeck(prevDeck => prevDeck.map(t => 
         t.name === selectedTechnique.name ? { ...t, missCount: t.missCount + 1 } : t
       ));
-      setCountdown(10);
+      setCountdown(countdownDuration);
     }
-  }, [selectedTechnique]);
+  }, [selectedTechnique, countdownDuration]);
 
   useEffect(() => {
-    if (countdown === null) return;
+    if (mode !== 'quiz' || countdown === null) return;
 
     if (countdown > 0) {
         timerRef.current = setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -190,13 +227,37 @@ const App: React.FC = () => {
     return () => {
         if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [countdown, handleRandomize]);
+  }, [countdown, handleRandomize, mode]);
 
+  const handleNextStudyTechnique = useCallback(() => {
+    const nextIndex = studyIndex + 1;
+    if (nextIndex < deck.length) {
+      setStudyIndex(nextIndex);
+      setSelectedTechnique(deck[nextIndex]);
+    } else {
+      setIsGameFinished(true);
+    }
+  }, [studyIndex, deck]);
+
+  const handleRestartStudy = useCallback(() => {
+    initializeDeck(selectedKyus, selectedCategories);
+  }, [initializeDeck, selectedKyus, selectedCategories]);
 
   const handleCloseSummary = useCallback(() => {
     setShowSummaryModal(false);
     initializeDeck(selectedKyus, selectedCategories);
   }, [initializeDeck, selectedKyus, selectedCategories]);
+  
+  const handleSaveSettings = useCallback((settings: { categories: string[], duration: number }) => {
+    setSelectedCategories(settings.categories);
+    setCountdownDuration(settings.duration);
+    setShowSettingsModal(false);
+  }, []);
+
+  const modeButtonClasses = (isActive: boolean) =>
+    `px-4 py-1.5 text-sm font-bold rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
+      isActive ? 'bg-blue-600 text-white' : 'bg-transparent text-gray-400 hover:bg-gray-700'
+    }`;
 
   return (
     <div className="h-screen bg-gray-900 text-white flex flex-col items-center p-2 sm:p-4 selection:bg-blue-500/30 overflow-hidden">
@@ -206,7 +267,8 @@ const App: React.FC = () => {
         <SettingsModal
           allCategories={ALL_CATEGORIES}
           selectedCategories={selectedCategories}
-          onSave={setSelectedCategories}
+          initialCountdownDuration={countdownDuration}
+          onSave={handleSaveSettings}
           onClose={() => setShowSettingsModal(false)}
         />
       )}
@@ -237,10 +299,23 @@ const App: React.FC = () => {
             onToggleKyu={handleToggleKyu} 
           />
         </div>
+
+        <div className="my-2 sm:my-4 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-3">
+          <div className="flex items-center gap-x-1 p-1 bg-gray-800 rounded-lg">
+            <button onClick={() => setMode('quiz')} className={modeButtonClasses(mode === 'quiz')}>Quiz</button>
+            <button onClick={() => setMode('study')} className={modeButtonClasses(mode === 'study')}>Estudo</button>
+          </div>
+          {mode === 'study' && (
+             <div className="flex items-center gap-x-1 p-1 bg-gray-800 rounded-lg animate-fade-in-up" style={{animationDuration: '0.3s'}}>
+              <button onClick={() => setStudyOrder('random')} className={modeButtonClasses(studyOrder === 'random')}>Aleatório</button>
+              <button onClick={() => setStudyOrder('sequential')} className={modeButtonClasses(studyOrder === 'sequential')}>Sequencial</button>
+            </div>
+          )}
+        </div>
         
         <div className="flex-1 flex flex-col items-center justify-center w-full min-h-0">
             <div className="my-1 flex h-auto w-full max-w-2xl items-center justify-center sm:my-2">
-              {progressMessage && (
+              {progressMessage && mode === 'quiz' && (
                 <div className="w-full rounded-lg bg-green-900/50 p-2 text-center text-green-400 transition-all duration-300">
                   <p className="font-semibold text-xs sm:text-sm">{progressMessage}</p>
                 </div>
@@ -249,28 +324,43 @@ const App: React.FC = () => {
 
             <TechniqueCard 
               technique={selectedTechnique} 
-              showAnswer={showAnswer}
+              showAnswer={mode === 'study' || showAnswer}
               isGameFinished={isGameFinished}
-              countdown={countdown}
+              countdown={mode === 'quiz' ? countdown : null}
               onSkip={handleRandomize}
+              mode={mode}
             />
         </div>
-
-        <div className="mt-2 flex flex-col sm:flex-row sm:mt-4 space-y-2 sm:space-y-0 sm:space-x-6">
-          <Button 
-            onClick={handleRandomize} 
-            variant="primary"
-            disabled={totalTechniques === 0 || isGameFinished || showAnswer}
-          >
-            {totalTechniques > 0 ? (selectedTechnique ? 'Próxima Técnica (Acertei)' : 'Começar Treino') : 'Nenhuma técnica encontrada'}
-          </Button>
-          <Button 
-            onClick={handleShowAnswer} 
-            variant="secondary"
-            disabled={!selectedTechnique || showAnswer || isGameFinished}
-          >
-            Mostrar Resposta (Errei)
-          </Button>
+        
+        <div className="mt-2 flex flex-col sm:flex-row justify-center sm:mt-4 space-y-2 sm:space-y-0 sm:space-x-6">
+          {mode === 'quiz' ? (
+            <>
+              <Button 
+                onClick={handleRandomize} 
+                variant="primary"
+                disabled={totalTechniques === 0 || isGameFinished || showAnswer}
+              >
+                {totalTechniques > 0 ? (selectedTechnique ? 'Próxima Técnica (Acertei)' : 'Começar Treino') : 'Nenhuma técnica encontrada'}
+              </Button>
+              {selectedTechnique && (
+                 <Button 
+                    onClick={handleShowAnswer} 
+                    variant="secondary"
+                    disabled={showAnswer || isGameFinished}
+                  >
+                    Mostrar Resposta (Errei)
+                  </Button>
+              )}
+            </>
+          ) : (
+             <Button
+                onClick={isGameFinished ? handleRestartStudy : handleNextStudyTechnique}
+                variant="primary"
+                disabled={totalTechniques === 0}
+              >
+                {totalTechniques > 0 ? (isGameFinished ? 'Recomeçar' : 'Próxima Técnica') : 'Nenhuma técnica encontrada'}
+              </Button>
+          )}
         </div>
       </main>
        <footer className="py-1 text-center text-gray-600 text-xs">

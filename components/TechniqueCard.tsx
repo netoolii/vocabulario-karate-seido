@@ -8,6 +8,7 @@ interface TechniqueCardProps {
   isGameFinished: boolean;
   countdown: number | null;
   onSkip: () => void;
+  mode: 'quiz' | 'study';
 }
 
 const TechniqueCard: React.FC<TechniqueCardProps> = ({
@@ -16,24 +17,25 @@ const TechniqueCard: React.FC<TechniqueCardProps> = ({
   isGameFinished,
   countdown,
   onSkip,
+  mode,
 }) => {
   const [backsideTechnique, setBacksideTechnique] = useState(technique);
 
   useEffect(() => {
-    // Only update the back of the card's content when it's about to be shown.
-    // This prevents the next technique's answer from flashing during the transition.
-    if (showAnswer) {
+    if (showAnswer || mode === 'study') {
       setBacksideTechnique(technique);
     }
-  }, [technique, showAnswer]);
+  }, [technique, showAnswer, mode]);
 
   if (isGameFinished) {
     return (
       <div className="w-full max-w-2xl h-full rounded-2xl bg-gray-800 shadow-2xl flex flex-col items-center justify-center p-4 sm:p-6 text-center transition-all duration-500 ease-in-out transform scale-100">
         <h2 className="text-xl font-bold text-green-400 sm:text-4xl">
-          🎉 Jogo finalizado!
+           {mode === 'quiz' ? '🎉 Jogo finalizado!' : '✅ Fim do Estudo!'}
         </h2>
-        <p className="mt-2 text-base text-gray-300 sm:text-xl">Todas as palavras foram estudadas.</p>
+        <p className="mt-2 text-base text-gray-300 sm:text-xl">
+            {mode === 'quiz' ? 'Todas as palavras foram estudadas.' : 'Você revisou todas as técnicas selecionadas.'}
+        </p>
       </div>
     );
   }

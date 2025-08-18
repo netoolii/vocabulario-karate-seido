@@ -14,14 +14,34 @@ const InstructionsModal: React.FC<InstructionsModalProps> = ({ onClose }) => {
       aria-labelledby="instructions-title"
     >
       <div className="bg-gray-800 rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 text-white border border-gray-700 transform transition-all animate-fade-in-up">
-        <h2 id="instructions-title" className="text-2xl sm:text-3xl font-bold text-blue-400 mb-4 text-center">
-          Bem vindo, Karateca Seido!
+        <h2 id="instructions-title" className="text-2xl sm:text-3xl font-bold text-blue-400 mb-6 text-center">
+          Bem-vindo ao Treino de Karatê Seido!
         </h2>
-        <div className="space-y-4 text-gray-300 text-base sm:text-lg">
-          <p>Selecione os Kyus que você deseja treinar. Você pode também clicar no ícone de engrenagem (⚙️) no canto da tela para escolher quais <strong>categorias de técnicas</strong> treinar: Golpes, Defesas, Bases, etc.</p>
-          <p>Após selecionar os Kyus e filtrar as categorias desejadas, comece o seu treino clicando em "<strong>Começar Treino</strong>".</p>
-          <p>Caso tenha acertado a resposta, apenas clique em "<strong>Próxima Técnica</strong>". Senão, clique em "<strong>Mostrar resposta</strong>", que será disponibilizada a descrição da palavra.</p>
-          <p className="font-bold text-center text-xl mt-6">Divirta-se!</p>
+        <div className="space-y-5 text-gray-300 text-base sm:text-lg">
+          <p>Primeiro, selecione os Kyus que deseja treinar. Você pode usar o ícone de engrenagem (⚙️) para filtrar as categorias de técnicas (Golpes, Defesas, Bases, etc.).</p>
+          
+          <p>Depois, escolha o seu modo de treino:</p>
+          
+          <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
+            <h4 className="font-bold text-lg text-white mb-2">🧠 Modo Estudo</h4>
+            <p className="text-sm sm:text-base">Ideal para aprender e revisar. A resposta do card fica sempre visível.</p>
+            <ul className="list-disc list-inside text-sm sm:text-base mt-2 space-y-1 pl-2">
+              <li><strong>Sequencial:</strong> Segue a ordem do currículo.</li>
+              <li><strong>Aleatório:</strong> Embaralha as técnicas.</li>
+            </ul>
+            <p className="text-sm sm:text-base mt-2">Use o botão "<strong>Próxima Técnica</strong>" para avançar.</p>
+          </div>
+
+          <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
+            <h4 className="font-bold text-lg text-white mb-2">🥋 Modo Quiz</h4>
+            <p className="text-sm sm:text-base">Perfeito para testar seus conhecimentos. Apenas o nome da técnica é mostrado. Pense na resposta!</p>
+            <ul className="list-disc list-inside text-sm sm:text-base mt-2 space-y-1 pl-2">
+              <li>Se acertou, clique em "<strong>Próxima Técnica (Acertei)</strong>".</li>
+              <li>Se errou ou não sabe, clique em "<strong>Mostrar Resposta (Errei)</strong>".</li>
+            </ul>
+             <p className="text-sm sm:text-base mt-2">No final, um resumo mostrará as técnicas que você mais errou.</p>
+          </div>
+
         </div>
         <div className="mt-8 text-center">
           <Button onClick={onClose} variant="primary">
