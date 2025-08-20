@@ -7,9 +7,10 @@ import KyuSelector from './components/KyuSelector';
 import InstructionsModal from './components/InstructionsModal';
 import SummaryModal from './components/SummaryModal';
 import SettingsModal from './components/SettingsModal';
+import PairsGame from './components/PairsGame';
 
 const ALL_CATEGORIES = ['Armas do Corpo', 'Vocabulário', 'Técnicas de Mãos (Te Waza)', 'Técnicas de Defesa (Uke Waza)', 'Técnicas de Pernas (Ashi Waza)', 'Bases (Dachi)'];
-const INSTRUCTIONS_VERSION = '1.1.1'; // Version for the instructions modal
+const INSTRUCTIONS_VERSION = '3.0.0'; // Version for the instructions modal
 
 const App: React.FC = () => {
   const [selectedKyus, setSelectedKyus] = useState<string[]>(
@@ -26,6 +27,7 @@ const App: React.FC = () => {
   });
   
   const [deck, setDeck] = useState<StudyTechnique[]>([]);
+  const [pairsDeck, setPairsDeck] = useState<StudyTechnique[]>([]);
   const [totalTechniques, setTotalTechniques] = useState(0);
   const [selectedTechnique, setSelectedTechnique] = useState<StudyTechnique | null>(null);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
@@ -48,9 +50,23 @@ const App: React.FC = () => {
   const [countdown, setCountdown] = useState<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [mode, setMode] = useState<'quiz' | 'study'>('quiz');
+  const [mode, setMode] = useState<'quiz' | 'study' | 'pairs'>('quiz');
   const [studyOrder, setStudyOrder] = useState<'random' | 'sequential'>('random');
   const [studyIndex, setStudyIndex] = useState(0);
+
+  // Pairs Game Settings
+  const [showStatusBar, setShowStatusBar] = useState<boolean>(() => {
+    const saved = localStorage.getItem('pairsShowStatusBar');
+    return saved ? JSON.parse(saved) : true;
+  });
+  const [enableTimer, setEnableTimer] = useState<boolean>(() => {
+    const saved = localStorage.getItem('pairsEnableTimer');
+    return saved ? JSON.parse(saved) : true;
+  });
+  const [enableCombo, setEnableCombo] = useState<boolean>(() => {
+    const saved = localStorage.getItem('pairsEnableCombo');
+    return saved ? JSON.parse(saved) : true;
+  });
 
   useEffect(() => {
     const seenVersion = localStorage.getItem('seenInstructionsVersion');
@@ -67,12 +83,25 @@ const App: React.FC = () => {
     localStorage.setItem('countdownDuration', countdownDuration.toString());
   }, [countdownDuration]);
 
+  useEffect(() => {
+    localStorage.setItem('pairsShowStatusBar', JSON.stringify(showStatusBar));
+  }, [showStatusBar]);
+
+  useEffect(() => {
+    localStorage.setItem('pairsEnableTimer', JSON.stringify(enableTimer));
+  }, [enableTimer]);
+
+  useEffect(() => {
+    localStorage.setItem('pairsEnableCombo', JSON.stringify(enableCombo));
+  }, [enableCombo]);
+
+
   const handleCloseInstructions = useCallback(() => {
     localStorage.setItem('seenInstructionsVersion', INSTRUCTIONS_VERSION);
     setShowInstructions(false);
   }, []);
 
-  const shuffleArray = (array: StudyTechnique[]): StudyTechnique[] => {
+  const shuffleArray = <T extends {}>(array: T[]): T[] => {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -88,27 +117,32 @@ const App: React.FC = () => {
       .flatMap(kyu => kyu.techniques)
       .filter(tech => categories.includes(tech.category));
 
-    const initialDeck = selectedTechs.map(t => ({ ...t, isMastered: false, missCount: 0 }));
-    setTotalTechniques(initialDeck.length);
+    const initialStudyDeck = selectedTechs.map(t => ({ ...t, isMastered: false, missCount: 0 }));
+    setTotalTechniques(initialStudyDeck.length);
     
-    // Reset general state
+    // Reset general state for all modes
     setShowAnswer(false);
-    setIsGameFinished(initialDeck.length === 0);
+    setIsGameFinished(initialStudyDeck.length === 0);
     if (timerRef.current) clearTimeout(timerRef.current);
     setCountdown(null);
+    setSelectedTechnique(null);
+    setDeck([]);
+    setPairsDeck([]);
+    setProgressMessage(null);
 
     if (mode === 'study') {
-      const studyDeck = studyOrder === 'random' ? shuffleArray(initialDeck) : initialDeck;
+      const studyDeck = studyOrder === 'random' ? shuffleArray(initialStudyDeck) : initialStudyDeck;
       setDeck(studyDeck);
       setStudyIndex(0);
       setSelectedTechnique(studyDeck.length > 0 ? studyDeck[0] : null);
-    } else { // quiz mode
-      setDeck(initialDeck);
-      setSelectedTechnique(null);
+    } else if (mode === 'quiz') {
+      setDeck(initialStudyDeck);
       setInteractionCount(0);
-      setProgressMessage(null);
       setShowSummaryModal(false);
       setDifficultTechniques([]);
+    } else if (mode === 'pairs') {
+      const shuffled = shuffleArray([...initialStudyDeck]);
+      setPairsDeck(shuffled);
     }
   }, [mode, studyOrder]);
 
@@ -239,18 +273,23 @@ const App: React.FC = () => {
     }
   }, [studyIndex, deck]);
 
-  const handleRestartStudy = useCallback(() => {
-    initializeDeck(selectedKyus, selectedCategories);
-  }, [initializeDeck, selectedKyus, selectedCategories]);
-
   const handleCloseSummary = useCallback(() => {
     setShowSummaryModal(false);
     initializeDeck(selectedKyus, selectedCategories);
   }, [initializeDeck, selectedKyus, selectedCategories]);
   
-  const handleSaveSettings = useCallback((settings: { categories: string[], duration: number }) => {
+  const handleSaveSettings = useCallback((settings: { 
+    categories: string[], 
+    duration: number,
+    showStatusBar: boolean,
+    enableTimer: boolean,
+    enableCombo: boolean,
+  }) => {
     setSelectedCategories(settings.categories);
     setCountdownDuration(settings.duration);
+    setShowStatusBar(settings.showStatusBar);
+    setEnableTimer(settings.enableTimer);
+    setEnableCombo(settings.enableCombo);
     setShowSettingsModal(false);
   }, []);
 
@@ -268,6 +307,9 @@ const App: React.FC = () => {
           allCategories={ALL_CATEGORIES}
           selectedCategories={selectedCategories}
           initialCountdownDuration={countdownDuration}
+          initialShowStatusBar={showStatusBar}
+          initialEnableTimer={enableTimer}
+          initialEnableCombo={enableCombo}
           onSave={handleSaveSettings}
           onClose={() => setShowSettingsModal(false)}
         />
@@ -304,6 +346,7 @@ const App: React.FC = () => {
           <div className="flex items-center gap-x-1 p-1 bg-gray-800 rounded-lg">
             <button onClick={() => setMode('quiz')} className={modeButtonClasses(mode === 'quiz')}>Quiz</button>
             <button onClick={() => setMode('study')} className={modeButtonClasses(mode === 'study')}>Estudo</button>
+            <button onClick={() => setMode('pairs')} className={modeButtonClasses(mode === 'pairs')}>Pares</button>
           </div>
           {mode === 'study' && (
              <div className="flex items-center gap-x-1 p-1 bg-gray-800 rounded-lg animate-fade-in-up" style={{animationDuration: '0.3s'}}>
@@ -314,26 +357,40 @@ const App: React.FC = () => {
         </div>
         
         <div className="flex-1 flex flex-col items-center justify-center w-full min-h-0">
-            <div className="my-1 flex h-auto w-full max-w-2xl items-center justify-center sm:my-2">
-              {progressMessage && mode === 'quiz' && (
-                <div className="w-full rounded-lg bg-green-900/50 p-2 text-center text-green-400 transition-all duration-300">
-                  <p className="font-semibold text-xs sm:text-sm">{progressMessage}</p>
-                </div>
-              )}
-            </div>
+          {mode === 'pairs' ? (
+              <PairsGame 
+                techniques={pairsDeck}
+                onRestart={() => initializeDeck(selectedKyus, selectedCategories)}
+                countdownDuration={countdownDuration}
+                showStatusBar={showStatusBar}
+                enableTimer={enableTimer}
+                enableCombo={enableCombo}
+                key={selectedKyus.join('-') + selectedCategories.join('-') + pairsDeck.length}
+              />
+          ) : (
+            <>
+              <div className="my-1 flex h-auto w-full max-w-2xl items-center justify-center sm:my-2">
+                {progressMessage && mode === 'quiz' && (
+                  <div className="w-full rounded-lg bg-green-900/50 p-2 text-center text-green-400 transition-all duration-300">
+                    <p className="font-semibold text-xs sm:text-sm">{progressMessage}</p>
+                  </div>
+                )}
+              </div>
 
-            <TechniqueCard 
-              technique={selectedTechnique} 
-              showAnswer={mode === 'study' || showAnswer}
-              isGameFinished={isGameFinished}
-              countdown={mode === 'quiz' ? countdown : null}
-              onSkip={handleRandomize}
-              mode={mode}
-            />
+              <TechniqueCard 
+                technique={selectedTechnique} 
+                showAnswer={mode === 'study' || showAnswer}
+                isGameFinished={isGameFinished}
+                countdown={mode === 'quiz' ? countdown : null}
+                onSkip={handleRandomize}
+                mode={mode}
+              />
+            </>
+          )}
         </div>
         
-        <div className="mt-2 flex flex-col sm:flex-row justify-center sm:mt-4 space-y-2 sm:space-y-0 sm:space-x-6">
-          {mode === 'quiz' ? (
+        <div className="mt-2 flex flex-col sm:flex-row justify-center sm:mt-4 space-y-2 sm:space-y-0 sm:space-x-6 h-14">
+          {mode === 'quiz' && (
             <>
               <Button 
                 onClick={handleRandomize} 
@@ -352,13 +409,14 @@ const App: React.FC = () => {
                   </Button>
               )}
             </>
-          ) : (
+          )}
+          {mode === 'study' && (
              <Button
-                onClick={isGameFinished ? handleRestartStudy : handleNextStudyTechnique}
+                onClick={handleNextStudyTechnique}
                 variant="primary"
-                disabled={totalTechniques === 0}
+                disabled={isGameFinished || totalTechniques === 0}
               >
-                {totalTechniques > 0 ? (isGameFinished ? 'Recomeçar' : 'Próxima Técnica') : 'Nenhuma técnica encontrada'}
+                {totalTechniques > 0 ? 'Próxima Técnica' : 'Nenhuma técnica encontrada'}
               </Button>
           )}
         </div>

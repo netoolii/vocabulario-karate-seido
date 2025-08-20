@@ -222,7 +222,7 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Kake Geri', description: 'Chute Circular de Fora para Dentro em "Gancho"', category: 'Técnicas de Pernas (Ashi Waza)', src: ''},
 
           // Bases (Dachi)
-          { name: 'Nekoashi Dachi', description: 'Postura com Apoio Traseiro do "Gato"', category: 'Bases (Dachi)', src: 'https://cdn2731.templcdn.com/wp-content/uploads/2012/12/Kagawa_nekoashi-dachi_1.jpg'},
+          { name: 'Nekoashi Dachi', description: 'Postura com Apoio Traseiro do "Gato"', category: 'Bases (Dachi)', src: ''},
 
           // Vocabulário
           { name: 'Shinzen', description: 'Templo; Centro Simbólico do Dojo', category: 'Vocabulário', src: ''},
@@ -242,11 +242,11 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Zori', description: 'Chinelo de Dedo', category: 'Vocabulário', src: ''},
 
           // Armas do Corpo
-          { name: 'Tettsui', description: 'Mão como Martelo (corrigir)', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Jud-tetsui.svg'},
-          { name: 'Toho', description: 'Parte Média Entre o Indicador e o Polegar', category: 'Armas do Corpo', src: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqT9vNb7ckV_NmRaYsZscJ5ngUo75M4YbRx6AnqcS730kpqqlIdUzJasz1h4KhC4-DJylDjFw_IeCnNUH2b41jih8LIHmgGy-pkUqZ7SaRsYxKqBAwD7vCBECSbdgv6wgb8hdE_UJz4try/s1600/430px-Jud-toho.svg.png'},
-          { name: 'Uchi Kote', description: 'Parte de Cima Antebraço', category: 'Armas do Corpo', src: 'https://www.tecnicas-de-karate.info/wa_images/kote-4.jpg?v=1hu7pad'},
-          { name: 'Soto Kote', description: 'Parte de Baixo Antebraço', category: 'Armas do Corpo', src: 'https://www.tecnicas-de-karate.info/wa_images/kote-5.jpg?v=1hu7pad'},
-          { name: 'Ushiro Kakato', description: 'Parte de Trás do Calcanhar', category: 'Armas do Corpo', src: 'https://www.tecnicas-de-karate.info/wa_images/ushiro-kakato_(1).jpg?v=1hu7pa9'}
+          { name: 'Tettsui', description: 'Mão como Martelo (corrigir)', category: 'Armas do Corpo', src: ''},
+          { name: 'Toho', description: 'Parte Média Entre o Indicador e o Polegar', category: 'Armas do Corpo', src: ''},
+          { name: 'Uchi Kote', description: 'Parte de Cima Antebraço', category: 'Armas do Corpo', src: ''},
+          { name: 'Soto Kote', description: 'Parte de Baixo Antebraço', category: 'Armas do Corpo', src: ''},
+          { name: 'Ushiro Kakato', description: 'Parte de Trás do Calcanhar', category: 'Armas do Corpo'}
         ]
       }
     ]
@@ -273,7 +273,7 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Tobi Mawashi Geri', description: 'Chute Circular com Salto', category: 'Técnicas de Pernas (Ashi Waza)', src: ''},
 
           // Bases (Dachi)
-          { name: 'Tsuruashi Dachi', description: 'Postura do "Grou" (Ave)', category: 'Bases (Dachi)', src: 'http://www.technique-karate.com/images/karate-tsuru-achi-dashi.jpg'},
+          { name: 'Tsuruashi Dachi', description: 'Postura do "Grou" (Ave)', category: 'Bases (Dachi)', src: ''},
 
           // Vocabulário
           { name: 'Atemi', description: 'Pancada Direcionada a um Ponto Anatômico Frágil', category: 'Vocabulário', src: ''},
@@ -291,11 +291,11 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Wazari', description: 'Quase Ponto Completo, Meio Ponto', category: 'Vocabulário', src: ''},
 
           // Armas do Corpo
-          { name: 'Ippon Ken', description: 'Golpe com o punho onde o dedo indicador é estendido e o polegar pressionado contra ele, formando uma ponta afiada', category: 'Armas do Corpo', src: 'https://the-digi-dojo.com/wp-content/uploads/2018/09/The-Digi-Dojo-Shiyobui-Hitosashiyubi-Ipponken.jpg'},
-          { name: 'Ippon Nukite', description: 'Dedo indicador é esticado e usado para atacar pontos vitais', category: 'Armas do Corpo', src: 'https://www.karate-frenstat.cz/images/Ippon_Nukite.gif'},
-          { name: 'Hirate', description: 'Palma da mão', category: 'Armas do Corpo', src: 'https://img.freepik.com/vetores-premium/imagem-de-contorno-da-palma-da-mao-com-fundo-branco_1266048-3230.jpg'},
-          { name: 'Koken', description: 'Parte de Cima do Pulso', category: 'Armas do Corpo', src: 'https://www.skkifwatford.co.uk/Techniques%20(500)/kakutu%20uke%20hand.JPG'},
-          { name: 'Tsuma Saki', description: 'Ponta do Pé', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Jud-tsumasaki.gif'},
+          { name: 'Ippon Ken', description: 'Golpe com o punho onde o dedo indicador é estendido e o polegar pressionado contra ele, formando uma ponta afiada', category: 'Armas do Corpo', src: ''},
+          { name: 'Ippon Nukite', description: '(corrigir)', category: 'Armas do Corpo', src: ''},
+          { name: 'Hirate', description: 'Palma da mão', category: 'Armas do Corpo', src: ''},
+          { name: 'Koken', description: 'Parte de Cima do Pulso', category: 'Armas do Corpo', src: ''},
+          { name: 'Tsuma Saki', description: 'Ponta do Pé', category: 'Armas do Corpo', src: ''},
         ]
       },
       {
@@ -333,11 +333,11 @@ export const TECHNIQUES_BY_BELT: BeltData[] = [
           { name: 'Makiwara', description: 'Alvo para Treinamento de Golpes, em Geral de Madeira e Palha', category: 'Vocabulário', src: ''},
         
           // Armas do Corpo
-          { name: 'Nakadaka Ken', description: 'Seiken com dedo médio Protuberante', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Jud-nakadaka-ken.gif'},
-          { name: 'Nihon Nukite', description: 'Dois dedos (indicador e médio) são usados para realizar o ataque', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Jud-nihon-nukite.gif'},
-          { name: 'Hiraken', description: 'Nós dos dedos', category: 'Armas do Corpo', src: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Jud-hiraken.gif'},
-          { name: 'Kumade', description: 'Palma plana com os dedos Dobrados', category: 'Armas do Corpo', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7QkmNARWL1EvtMxz4pU1BA_wMs46hW4HNmw&s'},
-          { name: 'Keiko', description: 'Ponta dos dedos em formato de pinça', category: 'Armas do Corpo', src: 'https://i.pinimg.com/736x/de/79/d2/de79d2aab20fe49f50f070ad82c70a77.jpg'},
+          { name: 'Nakadaka Ken', description: 'Seiken com dedo medio Protuberante', category: 'Armas do Corpo', src: ''},
+          { name: 'Nihon Nukite', description: 'Dois dedos (geralmente o indicador e o médio) são usados para realizar o ataque', category: 'Armas do Corpo', src: ''},
+          { name: 'Hiraken', description: 'Nós dos dedos', category: 'Armas do Corpo', src: ''},
+          { name: 'Kumade', description: 'Palma plana com os dedos Dobrados', category: 'Armas do Corpo', src: ''},
+          { name: 'Keiko', description: 'Ponta dos dedos em formato de pinça', category: 'Armas do Corpo', src: ''},
         
         ]
       }

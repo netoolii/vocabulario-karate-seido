@@ -8,7 +8,7 @@ interface TechniqueCardProps {
   isGameFinished: boolean;
   countdown: number | null;
   onSkip: () => void;
-  mode: 'quiz' | 'study';
+  mode: 'quiz' | 'study' | 'pairs';
 }
 
 const TechniqueCard: React.FC<TechniqueCardProps> = ({

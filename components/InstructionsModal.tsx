@@ -22,10 +22,21 @@ const InstructionsModal: React.FC<InstructionsModalProps> = ({ onClose }) => {
         
         <div className="flex-1 min-h-0 overflow-y-auto pr-4">
           <div className="space-y-5 text-gray-300 text-base sm:text-lg">
-            <p>Primeiro, selecione os Kyus que deseja treinar. Você pode usar o ícone de engrenagem (⚙️) para filtrar as categorias de técnicas (Golpes, Defesas, Bases, etc.).</p>
+            <p>Primeiro, selecione os Kyus que deseja treinar. Você pode usar o ícone de engrenagem (⚙️) para filtrar as categorias de técnicas (Golpes, Defesas, Bases, etc.) e selecionar o tempo para as atividades.</p>
             
             <p>Depois, escolha o seu modo de treino:</p>
             
+            <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
+              <h4 className="font-bold text-lg text-white mb-2">🥋 Modo Quiz</h4>
+              <p className="text-sm sm:text-base">Perfeito para testar seus conhecimentos. Apenas o nome da técnica é mostrado. Pense na resposta!</p>
+              <ul className="list-disc list-inside text-sm sm:text-base mt-2 space-y-1 pl-2">
+                <li>Se acertou, clique em "<strong>Próxima Técnica (Acertei)</strong>".</li>
+                <li>Se errou ou não sabe, clique em "<strong>Mostrar Resposta (Errei)</strong>".</li>
+              </ul>
+              <p className="text-sm sm:text-base mt-2">No final, um resumo mostrará as técnicas que você mais errou.</p>
+            </div>
+
+
             <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
               <h4 className="font-bold text-lg text-white mb-2">🧠 Modo Estudo</h4>
               <p className="text-sm sm:text-base">Ideal para aprender e revisar. A resposta do card fica sempre visível.</p>
@@ -36,15 +47,16 @@ const InstructionsModal: React.FC<InstructionsModalProps> = ({ onClose }) => {
               <p className="text-sm sm:text-base mt-2">Use o botão "<strong>Próxima Técnica</strong>" para avançar.</p>
             </div>
 
+
             <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
-              <h4 className="font-bold text-lg text-white mb-2">🥋 Modo Quiz</h4>
-              <p className="text-sm sm:text-base">Perfeito para testar seus conhecimentos. Apenas o nome da técnica é mostrado. Pense na resposta!</p>
-              <ul className="list-disc list-inside text-sm sm:text-base mt-2 space-y-1 pl-2">
-                <li>Se acertou, clique em "<strong>Próxima Técnica (Acertei)</strong>".</li>
-                <li>Se errou ou não sabe, clique em "<strong>Mostrar Resposta (Errei)</strong>".</li>
-              </ul>
-              <p className="text-sm sm:text-base mt-2">No final, um resumo mostrará as técnicas que você mais errou.</p>
-            </div>
+            <h4 className="font-bold text-lg text-white mb-2">🎯 Modo Pares</h4>
+            <p className="text-sm sm:text-base">Agilidade e memória! Combine o nome da técnica com sua descrição correta.</p>
+            <ul className="list-disc list-inside text-sm sm:text-base mt-2 space-y-1 pl-2">
+              <li>Corra contra o tempo para encontrar todos os pares.</li>
+              <li>Acerte em sequência para aumentar seu combo!</li>
+            </ul>
+            <p className="text-sm sm:text-base mt-2">Um ótimo jeito de acelerar o reconhecimento das técnicas.</p>
+          </div>
 
           </div>
         </div>
