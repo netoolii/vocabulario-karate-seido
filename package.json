@@ -1,12 +1,12 @@
 {
-  "name": "copy-of-treino-de-karatê-por-faixa",
+  "name": "treino-de-karatê-por-faixa",
   "private": true,
-  "version": "0.0.0",
+  "version": "3.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --watch",
-    "autoreload": "vite build --watch & vite preview --host",
+    "build": "vite build",
+    "autoreload": "vite build --watch",
     "preview": "vite preview",
     "host": "vite preview --host"
 
