@@ -10,7 +10,7 @@ import SettingsModal from './components/SettingsModal';
 import PairsGame from './components/PairsGame';
 
 const ALL_CATEGORIES = ['Armas do Corpo', 'Vocabulário', 'Técnicas de Mãos (Te Waza)', 'Técnicas de Defesa (Uke Waza)', 'Técnicas de Pernas (Ashi Waza)', 'Bases (Dachi)'];
-const INSTRUCTIONS_VERSION = '3.0.0'; // Version for the instructions modal
+const INSTRUCTIONS_VERSION = '3.0.1'; // Version for the instructions modal
 
 const App: React.FC = () => {
   const [selectedKyus, setSelectedKyus] = useState<string[]>(
