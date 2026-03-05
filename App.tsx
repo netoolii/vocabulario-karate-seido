@@ -8,9 +8,10 @@ import InstructionsModal from './components/InstructionsModal';
 import SummaryModal from './components/SummaryModal';
 import SettingsModal from './components/SettingsModal';
 import PairsGame from './components/PairsGame';
+import { Settings, Info, Trophy, BookOpen, Brain, Layers } from 'lucide-react';
 
 const ALL_CATEGORIES = ['Armas do Corpo', 'Vocabulário', 'Técnicas de Mãos (Te Waza)', 'Técnicas de Defesa (Uke Waza)', 'Técnicas de Pernas (Ashi Waza)', 'Bases (Dachi)'];
-const INSTRUCTIONS_VERSION = '3.0.1'; // Version for the instructions modal
+const INSTRUCTIONS_VERSION = '3.2.0'; // Version for the instructions modal
 
 const App: React.FC = () => {
   const [selectedKyus, setSelectedKyus] = useState<string[]>(
@@ -38,10 +39,20 @@ const App: React.FC = () => {
   const [showSummaryModal, setShowSummaryModal] = useState<boolean>(false);
   const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
   const [difficultTechniques, setDifficultTechniques] = useState<StudyTechnique[]>([]);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [totalImages, setTotalImages] = useState(0);
   
-  const [countdownDuration, setCountdownDuration] = useState<number>(() => {
+  const [quizDuration, setQuizDuration] = useState<number>(() => {
     try {
-      const saved = localStorage.getItem('countdownDuration');
+      const saved = localStorage.getItem('quizDuration');
+      return saved ? parseInt(saved, 10) : 10;
+    } catch (error) {
+      return 10;
+    }
+  });
+  const [pairsDuration, setPairsDuration] = useState<number>(() => {
+    try {
+      const saved = localStorage.getItem('pairsDuration');
       return saved ? parseInt(saved, 10) : 10;
     } catch (error) {
       return 10;
@@ -68,6 +79,44 @@ const App: React.FC = () => {
     return saved ? JSON.parse(saved) : true;
   });
 
+
+// test load images before
+
+  const preloadImages = () => {
+    const allImages: string[] = [];
+    TECHNIQUES_BY_BELT.forEach((belt) => {
+      belt.kyus.forEach((kyu) => {
+        kyu.techniques.forEach((technique) => {
+          if (technique.src && technique.src.trim() !== '') {
+            allImages.push(technique.src);
+          }
+        });
+      });
+    });
+
+    const uniqueImages = Array.from(new Set(allImages));
+    setTotalImages(uniqueImages.length);
+    let loadedCount = 0;
+
+    if (uniqueImages.length === 0) {
+      setLoadingProgress(100);
+      return;
+    }
+
+    uniqueImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = img.onerror = () => {
+        loadedCount++;
+        setLoadingProgress(Math.round((loadedCount / uniqueImages.length) * 100));
+      };
+    });
+  };
+
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
   useEffect(() => {
     const seenVersion = localStorage.getItem('seenInstructionsVersion');
     if (seenVersion !== INSTRUCTIONS_VERSION) {
@@ -80,8 +129,12 @@ const App: React.FC = () => {
   }, [selectedCategories]);
 
   useEffect(() => {
-    localStorage.setItem('countdownDuration', countdownDuration.toString());
-  }, [countdownDuration]);
+    localStorage.setItem('quizDuration', quizDuration.toString());
+  }, [quizDuration]);
+
+  useEffect(() => {
+    localStorage.setItem('pairsDuration', pairsDuration.toString());
+  }, [pairsDuration]);
 
   useEffect(() => {
     localStorage.setItem('pairsShowStatusBar', JSON.stringify(showStatusBar));
@@ -245,9 +298,9 @@ const App: React.FC = () => {
       setDeck(prevDeck => prevDeck.map(t => 
         t.name === selectedTechnique.name ? { ...t, missCount: t.missCount + 1 } : t
       ));
-      setCountdown(countdownDuration);
+      setCountdown(quizDuration);
     }
-  }, [selectedTechnique, countdownDuration]);
+  }, [selectedTechnique, quizDuration]);
 
   useEffect(() => {
     if (mode !== 'quiz' || countdown === null) return;
@@ -280,13 +333,15 @@ const App: React.FC = () => {
   
   const handleSaveSettings = useCallback((settings: { 
     categories: string[], 
-    duration: number,
+    quizDuration: number,
+    pairsDuration: number,
     showStatusBar: boolean,
     enableTimer: boolean,
     enableCombo: boolean,
   }) => {
     setSelectedCategories(settings.categories);
-    setCountdownDuration(settings.duration);
+    setQuizDuration(settings.quizDuration);
+    setPairsDuration(settings.pairsDuration);
     setShowStatusBar(settings.showStatusBar);
     setEnableTimer(settings.enableTimer);
     setEnableCombo(settings.enableCombo);
@@ -299,14 +354,20 @@ const App: React.FC = () => {
     }`;
 
   return (
-    <div className="h-screen bg-gray-900 text-white flex flex-col items-center p-2 sm:p-4 selection:bg-blue-500/30 overflow-hidden">
-      {showInstructions && <InstructionsModal onClose={handleCloseInstructions} />}
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-2 sm:p-4 selection:bg-blue-500/30 overflow-y-auto">
+      {showInstructions && (
+        <InstructionsModal 
+          onClose={handleCloseInstructions} 
+          loadingProgress={loadingProgress}
+        />
+      )}
       {showSummaryModal && <SummaryModal techniques={difficultTechniques} onClose={handleCloseSummary} />}
       {showSettingsModal && (
         <SettingsModal
           allCategories={ALL_CATEGORIES}
           selectedCategories={selectedCategories}
-          initialCountdownDuration={countdownDuration}
+          initialQuizDuration={quizDuration}
+          initialPairsDuration={pairsDuration}
           initialShowStatusBar={showStatusBar}
           initialEnableTimer={enableTimer}
           initialEnableCombo={enableCombo}
@@ -317,17 +378,14 @@ const App: React.FC = () => {
       <main className="flex flex-col items-center w-full text-center flex-1 min-h-0">
         <div className="relative w-full max-w-4xl mx-auto flex justify-center items-center">
           <h1 className="text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl sm:mb-2">
-              Vocabulário <span className="text-blue-400">Karatê Seido</span>
+              Treino de <span className="text-blue-400">Karatê Seido</span>
           </h1>
           <button
             onClick={() => setShowSettingsModal(true)}
             className="absolute top-1/2 -translate-y-1/2 right-0 p-2 text-gray-500 hover:text-white transition-colors duration-200 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Filtrar categorias"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+            <Settings className="h-6 w-6 sm:h-7 sm:w-7" />
           </button>
         </div>
         <p className="mb-2 text-sm text-gray-400 max-w-3xl sm:text-lg sm:mb-4">
@@ -344,9 +402,24 @@ const App: React.FC = () => {
 
         <div className="my-2 sm:my-4 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-3">
           <div className="flex items-center gap-x-1 p-1 bg-gray-800 rounded-lg">
-            <button onClick={() => setMode('quiz')} className={modeButtonClasses(mode === 'quiz')}>Quiz</button>
-            <button onClick={() => setMode('study')} className={modeButtonClasses(mode === 'study')}>Estudo</button>
-            <button onClick={() => setMode('pairs')} className={modeButtonClasses(mode === 'pairs')}>Pares</button>
+            <button onClick={() => setMode('quiz')} className={modeButtonClasses(mode === 'quiz')}>
+              <div className="flex items-center gap-1.5">
+                <Brain className="w-4 h-4" />
+                <span>Quiz</span>
+              </div>
+            </button>
+            <button onClick={() => setMode('study')} className={modeButtonClasses(mode === 'study')}>
+              <div className="flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4" />
+                <span>Estudo</span>
+              </div>
+            </button>
+            <button onClick={() => setMode('pairs')} className={modeButtonClasses(mode === 'pairs')}>
+              <div className="flex items-center gap-1.5">
+                <Layers className="w-4 h-4" />
+                <span>Pares</span>
+              </div>
+            </button>
           </div>
           {mode === 'study' && (
              <div className="flex items-center gap-x-1 p-1 bg-gray-800 rounded-lg animate-fade-in-up" style={{animationDuration: '0.3s'}}>
@@ -356,12 +429,12 @@ const App: React.FC = () => {
           )}
         </div>
         
-        <div className="flex-1 flex flex-col items-center justify-center w-full min-h-0">
+        <div className="flex-1 flex flex-col items-center justify-center w-full">
           {mode === 'pairs' ? (
               <PairsGame 
                 techniques={pairsDeck}
                 onRestart={() => initializeDeck(selectedKyus, selectedCategories)}
-                countdownDuration={countdownDuration}
+                countdownDuration={pairsDuration}
                 showStatusBar={showStatusBar}
                 enableTimer={enableTimer}
                 enableCombo={enableCombo}

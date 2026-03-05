@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import type { Technique } from '../types';
 import Button from './Button';
 import TimeUpModal from './TimeUpModal';
+import { Flame, Timer, CheckCircle2, RotateCcw, Trophy } from 'lucide-react';
 
 interface PairsGameProps {
   techniques: Technique[];
@@ -252,15 +253,26 @@ const PairsGame: React.FC<PairsGameProps> = ({
         {!isGameFinished ? (
             <>
               {showStatusBar && (
-                <div className="w-full grid grid-cols-3 items-center mb-2 sm:mb-4 px-2 py-1 bg-gray-800/50 rounded-lg flex-shrink-0">
-                  <div className="text-lg sm:text-xl font-mono text-white tracking-widest text-left">
-                    {enableCombo ? `🔥 ${currentCombo}` : <span>&nbsp;</span>}
+                <div className="w-full grid grid-cols-3 items-center mb-2 sm:mb-4 px-4 py-2 bg-gray-800/50 rounded-xl border border-gray-700 flex-shrink-0">
+                  <div className="flex items-center gap-1.5 text-lg sm:text-xl font-mono text-orange-400 tracking-widest text-left">
+                    {enableCombo ? (
+                      <>
+                        <Flame className="w-5 h-5 fill-orange-400" />
+                        <span>{currentCombo}</span>
+                      </>
+                    ) : <span>&nbsp;</span>}
                   </div>
-                  <div className="text-sm sm:text-base font-bold text-gray-300 text-center">
-                    {matchedCount} / {totalTechniques}
+                  <div className="text-sm sm:text-base font-bold text-gray-300 text-center flex items-center justify-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-400" />
+                    <span>{matchedCount} / {totalTechniques}</span>
                   </div>
-                  <div className="text-lg sm:text-xl font-mono text-white tracking-widest text-right">
-                    {enableTimer ? `⏳ ${String(Math.floor(timeLeft / 60)).padStart(2, '0')}:${String(timeLeft % 60).padStart(2, '0')}`: <span>&nbsp;</span>}
+                  <div className="flex items-center justify-end gap-1.5 text-lg sm:text-xl font-mono text-blue-400 tracking-widest text-right">
+                    {enableTimer ? (
+                      <>
+                        <Timer className="w-5 h-5" />
+                        <span>{String(Math.floor(timeLeft / 60)).padStart(2, '0')}:{String(timeLeft % 60).padStart(2, '0')}</span>
+                      </>
+                    ) : <span>&nbsp;</span>}
                   </div>
                 </div>
               )}
@@ -304,10 +316,14 @@ const PairsGame: React.FC<PairsGameProps> = ({
             </>
         ) : (
             <div className="flex flex-col items-center justify-center text-center animate-fade-in-up h-full">
+                <div className="mb-6 p-6 bg-green-500/10 rounded-full">
+                  <Trophy className="w-16 h-16 text-green-400" />
+                </div>
                 <h2 className="text-2xl sm:text-4xl font-bold text-green-400 mb-4">🎉 Parabéns!</h2>
                 <p className="text-lg text-gray-300 mb-8">Você estudou todas as técnicas.</p>
-                <Button onClick={onRestart} variant="primary">
-                    Recomeçar
+                <Button onClick={onRestart} variant="primary" className="flex items-center gap-2">
+                    <RotateCcw className="w-5 h-5" />
+                    <span>Recomeçar</span>
                 </Button>
             </div>
         )}

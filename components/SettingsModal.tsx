@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import SettingsInstructionsModal from './SettingsInstructionsModal';
+import { HelpCircle, X, Check, Filter, Clock, Gamepad2 } from 'lucide-react';
 
-const SETTINGS_INSTRUCTIONS_VERSION = '1.0.0';
+const SETTINGS_INSTRUCTIONS_VERSION = '2.0.0';
 
 interface SettingsModalProps {
   allCategories: string[];
   selectedCategories: string[];
-  initialCountdownDuration: number;
+  initialQuizDuration: number;
+  initialPairsDuration: number;
   initialShowStatusBar: boolean;
   initialEnableTimer: boolean;
   initialEnableCombo: boolean;
   onSave: (settings: { 
     categories: string[]; 
-    duration: number;
+    quizDuration: number;
+    pairsDuration: number;
     showStatusBar: boolean;
     enableTimer: boolean;
     enableCombo: boolean;
@@ -24,7 +27,8 @@ interface SettingsModalProps {
 const SettingsModal: React.FC<SettingsModalProps> = ({ 
   allCategories, 
   selectedCategories, 
-  initialCountdownDuration,
+  initialQuizDuration,
+  initialPairsDuration,
   initialShowStatusBar,
   initialEnableTimer,
   initialEnableCombo,
@@ -32,7 +36,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose 
 }) => {
   const [localSelectedCategories, setLocalSelectedCategories] = useState<string[]>(selectedCategories);
-  const [localCountdownDuration, setLocalCountdownDuration] = useState<number>(initialCountdownDuration);
+  const [localQuizDuration, setLocalQuizDuration] = useState<number>(initialQuizDuration);
+  const [localPairsDuration, setLocalPairsDuration] = useState<number>(initialPairsDuration);
   const [localShowStatusBar, setLocalShowStatusBar] = useState<boolean>(initialShowStatusBar);
   const [localEnableTimer, setLocalEnableTimer] = useState<boolean>(initialEnableTimer);
   const [localEnableCombo, setLocalEnableCombo] = useState<boolean>(initialEnableCombo);
@@ -61,7 +66,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   const handleSave = () => {
     onSave({
       categories: localSelectedCategories,
-      duration: localCountdownDuration,
+      quizDuration: localQuizDuration,
+      pairsDuration: localPairsDuration,
       showStatusBar: localShowStatusBar,
       enableTimer: localEnableTimer,
       enableCombo: localEnableCombo,
@@ -80,7 +86,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       aria-modal="true"
       role="dialog"
       aria-labelledby="settings-title"
@@ -88,86 +94,122 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
       {showInstructions && <SettingsInstructionsModal onClose={handleCloseInstructions} />}
       <div className="bg-gray-800 rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 text-white border border-gray-700 transform transition-all animate-fade-in-up flex flex-col max-h-[90vh]">
         <div className="flex-shrink-0">
-          <div className="relative flex items-center justify-center">
-            <h2 id="settings-title" className="text-2xl sm:text-3xl font-bold text-blue-400 mb-6 text-center">
-              Configurações do Treino
+          <div className="relative flex items-center justify-between mb-6">
+            <h2 id="settings-title" className="text-2xl sm:text-3xl font-bold text-blue-400">
+              Configurações
             </h2>
-            <button
-              onClick={() => setShowInstructions(true)}
-              className="absolute top-1/2 -translate-y-1/2 right-0 p-2 text-gray-500 hover:text-white transition-colors duration-200 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Ver instruções das configurações"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowInstructions(true)}
+                className="p-2 text-gray-500 hover:text-white transition-colors duration-200 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Ver instruções das configurações"
+              >
+                <HelpCircle className="h-6 w-6" />
+              </button>
+              <button
+                onClick={onClose}
+                className="p-2 text-gray-500 hover:text-white transition-colors duration-200 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Fechar configurações"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
           </div>
         </div>
         
-        <div className="flex-1 min-h-0 overflow-y-auto pr-4">
+        <div className="flex-1 min-h-0 overflow-y-auto pr-4 custom-scrollbar">
           <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-200 mb-4 border-b border-gray-700 pb-2">Configurações Gerais</h3>
-            <div className="flex flex-col">
-              <label htmlFor="countdown-slider" className="mb-2 font-semibold text-gray-300">
-                Duração do Temporizador (Quiz/Pares): <span className="font-bold text-blue-400">{localCountdownDuration}s</span>
-              </label>
-              <input
-                id="countdown-slider"
-                type="range"
-                min="3"
-                max="60"
-                value={localCountdownDuration}
-                onChange={(e) => setLocalCountdownDuration(Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-              />
+            <div className="flex items-center gap-2 mb-4 border-b border-gray-700 pb-2">
+              <Clock className="w-5 h-5 text-blue-400" />
+              <h3 className="text-xl font-bold text-gray-200">Temporizadores</h3>
+            </div>
+            <div className="space-y-6">
+              <div className="flex flex-col">
+                <label htmlFor="quiz-slider" className="mb-2 font-semibold text-gray-300">
+                  Modo Quiz: <span className="font-bold text-blue-400">{localQuizDuration}s</span>
+                </label>
+                <input
+                  id="quiz-slider"
+                  type="range"
+                  min="1"
+                  max="60"
+                  value={localQuizDuration}
+                  onChange={(e) => setLocalQuizDuration(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="pairs-slider" className="mb-2 font-semibold text-gray-300">
+                  Modo Pares: <span className="font-bold text-blue-400">{localPairsDuration}s</span>
+                </label>
+                <input
+                  id="pairs-slider"
+                  type="range"
+                  min="5"
+                  max="180"
+                  value={localPairsDuration}
+                  onChange={(e) => setLocalPairsDuration(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                />
+              </div>
             </div>
           </div>
 
           <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-200 mb-4 border-b border-gray-700 pb-2">Configurações do Jogo de Pares</h3>
+            <div className="flex items-center gap-2 mb-4 border-b border-gray-700 pb-2">
+              <Gamepad2 className="w-5 h-5 text-blue-400" />
+              <h3 className="text-xl font-bold text-gray-200">Modo Pares</h3>
+            </div>
             <div className="space-y-4">
-              <label className="flex items-center justify-between cursor-pointer">
-                <span className="font-semibold text-gray-300">Mostrar barra de status</span>
+              <label className="flex items-center justify-between cursor-pointer group">
+                <span className="font-semibold text-gray-300 group-hover:text-white transition-colors">Mostrar barra de status</span>
                 <ToggleSwitch checked={localShowStatusBar} onChange={() => setLocalShowStatusBar(prev => !prev)} />
               </label>
-              <label className="flex items-center justify-between cursor-pointer">
-                <span className="font-semibold text-gray-300">Habilitar temporizador</span>
+              <label className="flex items-center justify-between cursor-pointer group">
+                <span className="font-semibold text-gray-300 group-hover:text-white transition-colors">Habilitar temporizador</span>
                 <ToggleSwitch checked={localEnableTimer} onChange={() => setLocalEnableTimer(prev => !prev)} />
               </label>
-              <label className="flex items-center justify-between cursor-pointer">
-                <span className="font-semibold text-gray-300">Habilitar contador de combo</span>
+              <label className="flex items-center justify-between cursor-pointer group">
+                <span className="font-semibold text-gray-300 group-hover:text-white transition-colors">Habilitar contador de combo</span>
                 <ToggleSwitch checked={localEnableCombo} onChange={() => setLocalEnableCombo(prev => !prev)} />
               </label>
             </div>
           </div>
 
           <div>
-            <h3 className="text-xl font-bold text-gray-200 mb-4 border-b border-gray-700 pb-2">Filtro de Categorias</h3>
-              <p className="text-gray-400 text-center mb-4">Selecione as categorias para incluir no treino.</p>
+            <div className="flex items-center gap-2 mb-4 border-b border-gray-700 pb-2">
+              <Filter className="w-5 h-5 text-blue-400" />
+              <h3 className="text-xl font-bold text-gray-200">Categorias</h3>
+            </div>
+              <p className="text-gray-400 text-sm mb-4">Selecione as categorias para incluir no treino.</p>
               
               <div className="flex justify-center gap-4 mb-6">
                 <button
                   onClick={() => setLocalSelectedCategories(allCategories)}
                   disabled={allSelected}
-                  className="text-sm font-semibold text-blue-300 hover:text-blue-200 disabled:text-gray-500 disabled:cursor-not-allowed transition"
+                  className="text-sm font-semibold text-blue-300 hover:text-blue-200 disabled:text-gray-500 disabled:cursor-not-allowed transition flex items-center gap-1"
                 >
-                  Selecionar Todas
+                  <Check className="w-4 h-4" />
+                  <span>Todas</span>
                 </button>
                 <button
                   onClick={() => setLocalSelectedCategories([])}
                   disabled={noneSelected}
-                  className="text-sm font-semibold text-blue-300 hover:text-blue-200 disabled:text-gray-500 disabled:cursor-not-allowed transition"
+                  className="text-sm font-semibold text-blue-300 hover:text-blue-200 disabled:text-gray-500 disabled:cursor-not-allowed transition flex items-center gap-1"
                 >
-                  Limpar Seleção
+                  <X className="w-4 h-4" />
+                  <span>Limpar</span>
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-4">
                 {allCategories.map(category => (
                   <label 
                     key={category} 
-                    className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors duration-200 ${
-                      localSelectedCategories.includes(category) ? 'bg-blue-900/50' : 'bg-gray-700/50 hover:bg-gray-700'
+                    className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 border ${
+                      localSelectedCategories.includes(category) 
+                        ? 'bg-blue-900/30 border-blue-500/50' 
+                        : 'bg-gray-700/30 border-transparent hover:bg-gray-700/50'
                     }`}
                   >
                     <input
@@ -176,19 +218,19 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                       onChange={() => handleToggleCategory(category)}
                       className="h-5 w-5 rounded bg-gray-600 border-gray-500 text-blue-500 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800"
                     />
-                    <span className="font-medium text-gray-200">{category}</span>
+                    <span className="font-medium text-gray-200 text-sm">{category}</span>
                   </label>
                 ))}
               </div>
           </div>
         </div>
         
-        <div className="mt-8 flex justify-center space-x-4 flex-shrink-0">
+        <div className="mt-8 flex justify-center space-x-4 flex-shrink-0 pt-4 border-t border-gray-700">
           <Button onClick={onClose} variant="secondary">
             Cancelar
           </Button>
           <Button onClick={handleSave} variant="primary" disabled={noneSelected}>
-            Salvar Configurações
+            Salvar
           </Button>
         </div>
       </div>

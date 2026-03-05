@@ -1,19 +1,27 @@
 {
   "name": "vocabulario-karate-seido",
   "private": true,
-  "version": "3.0.1",
+  "version": "3.2.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "autoreload": "vite build --watch",
-    "preview": "vite preview",
-    "host": "vite preview --host"
-
+    "preview": "vite preview --host 0.0.0.0",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.4",
+    "autoprefixer": "^10.4.20",
+    "lucide-react": "^0.577.0",
+    "motion": "^12.35.0",
+    "postcss": "^8.4.49",
+    "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react": "^19.1.1"
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
